@@ -89,7 +89,7 @@
       const c = cover(p);
       const isVid = c && typeof c !== "string";
       return `<a class="card${big ? " big" : ""}${small ? " small" : ""}" href="#work-${p.slug}">
-        <div class="frame">${c ? media(c, t(p.title), i < 2) : typo(p)}${isVid ? `<span class="badge">Video</span>` : ""}</div>
+        <div class="frame${p.coverFit === "contain" ? " contain" : ""}"${p.coverFit === "contain" && typeof c === "string" ? ` style="--cbg:url('${esc(R(c))}')"` : ""}>${c ? media(c, t(p.title), i < 2) : typo(p)}${isVid ? `<span class="badge">Video</span>` : ""}</div>
         <div class="meta label"><span>${esc(t(C.categories[p.cat]))}</span><span>${esc(p.year)}</span></div>
         <h3>${esc(t(p.title))}</h3>${small ? "" : `<p>${esc(t(p.summary))}</p>`}</a>`;
   };
@@ -104,7 +104,7 @@
       const c = cover(p);
       const isVid = c && typeof c !== "string";
       return `<a class="card${big ? " big" : ""}" href="#work-${p.slug}">
-        <div class="frame">${c ? media(c, t(p.title), i < 2) : typo(p)}${isVid ? `<span class="badge">Video</span>` : ""}</div>
+        <div class="frame${p.coverFit === "contain" ? " contain" : ""}"${p.coverFit === "contain" && typeof c === "string" ? ` style="--cbg:url('${esc(R(c))}')"` : ""}>${c ? media(c, t(p.title), i < 2) : typo(p)}${isVid ? `<span class="badge">Video</span>` : ""}</div>
         <div class="meta label"><span>${esc(t(C.categories[p.cat]))}</span><span>${esc(p.year)}</span></div>
         <h3>${esc(t(p.title))}</h3><p>${esc(t(p.summary))}</p></a>`;
     }).join("");
@@ -193,6 +193,32 @@
 
   const footer = () => `<footer class="band"><div class="wrap"><span>© 2026 Laura Magrin</span><span>${U("footer")}</span></div></footer>`;
 
+  /* ---------- auto-advancing photo carousel (long galleries) ---------- */
+  const carousel = (imgs, title) => `<div class="carousel" data-carousel>
+      <div class="c-track" tabindex="0" aria-label="${esc(title)} — ${U("galleryHint")}">${imgs.map((s, k) => `<figure class="c-slide"><button class="zoom" type="button" data-lb aria-label="${esc(title)} ${k + 1}">${img(s, `${title} — ${k + 1}`, k < 4)}</button></figure>`).join("")}</div>
+      <div class="c-ui"><button class="c-btn" type="button" data-cstep="-1" aria-label="${U("prev")}">←</button><span class="c-count label">1 / ${imgs.length}</span><button class="c-btn" type="button" data-cstep="1" aria-label="${U("nextImg")}">→</button><span class="c-hint label">${U("galleryHint")}</span></div></div>`;
+  let carTimers = [];
+  function initCarousels() {
+    carTimers.forEach(clearInterval); carTimers = [];
+    document.querySelectorAll("[data-carousel]").forEach((c) => {
+      const tr = c.querySelector(".c-track"), cnt = c.querySelector(".c-count");
+      const slides = () => [...tr.children];
+      const idx = () => { const x = tr.scrollLeft; let best = 0, d = 1e9; slides().forEach((s, i) => { const dd = Math.abs(s.offsetLeft - tr.firstElementChild.offsetLeft - x); if (dd < d) { d = dd; best = i; } }); return best; };
+      const go = (i) => { const s = slides(); const n = (i + s.length) % s.length; tr.scrollTo({ left: s[n].offsetLeft - s[0].offsetLeft, behavior: REDUCED ? "auto" : "smooth" }); };
+      const atEnd = () => tr.scrollLeft + tr.clientWidth >= tr.scrollWidth - 4;
+      c.step = (dir) => { if (dir > 0 && atEnd()) go(0); else go(idx() + dir); };
+      tr.addEventListener("scroll", () => { cnt.textContent = `${idx() + 1} / ${slides().length}`; }, { passive: true });
+      let hold = 0;
+      const pause = () => { hold = Date.now() + 7000; };
+      ["pointerenter", "pointerdown", "focusin", "touchstart", "wheel"].forEach((ev) => c.addEventListener(ev, pause, { passive: true }));
+      if (!REDUCED) carTimers.push(setInterval(() => {
+        const r = c.getBoundingClientRect();
+        if (Date.now() < hold || document.hidden || r.bottom < 0 || r.top > innerHeight || !document.getElementById("lb").hidden) return;
+        c.step(1);
+      }, 3200));
+    });
+  }
+
   /* ---------- team credits ---------- */
   const person = (x) => `<span>${x.me ? U("teamMe") : esc(x.name)}${x.years ? ` <i>${esc(x.years)}</i>` : ""}${x.note ? ` <i>${esc(t(x.note))}</i>` : ""}</span>`;
   function teamHTML(p) {
@@ -213,7 +239,7 @@
     const gallery = (loops.length || imgs.length)
       ? `<section class="band light"><div class="wrap">
           ${loops.length && !inWall ? `<div class="loops">${loops.map((v) => player(v, t(p.title))).join("")}</div>` : ""}
-          ${imgs.length ? `<div class="wall">${inWall ? `<figure>${player(loops[0], t(p.title))}</figure>` : ""}${imgs.map((s, k) => `<figure><button class="zoom" type="button" data-lb aria-label="${esc(t(p.title))} ${k + 1}">${img(s, `${t(p.title)} — ${k + 1}`, k < 3)}</button></figure>`).join("")}</div>` : ""}
+          ${imgs.length > 12 ? carousel(imgs, t(p.title)) : imgs.length ? `<div class="wall">${inWall ? `<figure>${player(loops[0], t(p.title))}</figure>` : ""}${imgs.map((s, k) => `<figure><button class="zoom" type="button" data-lb aria-label="${esc(t(p.title))} ${k + 1}">${img(s, `${t(p.title)} — ${k + 1}`, k < 3)}</button></figure>`).join("")}</div>` : ""}
         </div></section>`
       : `<section class="band light"><div class="wrap"><div class="wall">${[0, 1, 2].map(() => `<figure>${ph(U("imgSoon"), "static")}</figure>`).join("")}</div></div></section>`;
     const sets = (p.sets || []).map((g, n) => `<section class="band ${n % 2 ? "light" : ""} set-band"><div class="wrap"><div class="head"><h2>${esc(t(g.title))}</h2><p>${esc(t(g.note || ""))}</p></div>
@@ -341,7 +367,9 @@
       home.querySelectorAll("video").forEach((v) => v.pause());
       document.title = `${t(p.title)} · Laura Magrin`;
       if (scroll) window.scrollTo(0, 0);
+      initCarousels();
     } else {
+      carTimers.forEach(clearInterval); carTimers = [];
       cs.innerHTML = ""; cs.hidden = true; home.hidden = false;
       document.title = "Laura Magrin";
     }
@@ -366,6 +394,8 @@
     }
     if (e.target.closest("[data-close]")) { closeModal(); return; }
     if (e.target.closest("[data-lbclose]")) { lbClose(); return; }
+    const cs = e.target.closest("[data-cstep]");
+    if (cs) { const c = cs.closest("[data-carousel]"); if (c && c.step) c.step(Number(cs.dataset.cstep)); return; }
     const st = e.target.closest("[data-lbstep]");
     if (st) { lbShow(lbIdx + Number(st.dataset.lbstep)); return; }
     const z = e.target.closest("[data-lb]");

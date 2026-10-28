@@ -93,6 +93,7 @@ window.CONTENT = {
     myRole: { en: "Role", pt: "Função" },
     place: { en: "Where", pt: "Local" },
     deliverables: { en: "What I did", pt: "O que fiz" },
+    galleryHint: { en: "Swipe, use the arrows or click a photo to enlarge", pt: "Arraste, use as setas ou clique numa foto para ampliar" },
     teamTitle: { en: "Team credits", pt: "Créditos do time" },
     teamCopy: { en: "Copy", pt: "Copy" },
     teamDesign: { en: "Design", pt: "Design" },
@@ -123,7 +124,7 @@ window.CONTENT = {
   /* Public numbers only. Internal Greener figures stay in the résumé. */
   numbers: [
     { value: "19+", label: { en: "in-person events led, from 50-guest meetups to 2-day summits", pt: "eventos presenciais liderados, de encontros para 50 pessoas a summits de 2 dias" } },
-    { value: "5", label: { en: "editions of Greener Summit, 2022 to 2026", pt: "edições do Greener Summit, de 2022 a 2026" } },
+    { value: "6", label: { en: "editions of Greener Summit, 2022 to 2027 (2027 in production)", pt: "edições do Greener Summit, de 2022 a 2027 (2027 em produção)" } },
     { value: "200+", label: { en: "participants and 130+ companies at Greener Summit 2026", pt: "participantes e 130+ empresas no Greener Summit 2026" } },
     { value: "68K+", label: { en: "YouTube views on webinars I coordinated", pt: "visualizações no YouTube em webinars que coordenei" } },
     { value: "4×", label: { en: "Instagram growth, from 3K to 13K+ followers", pt: "crescimento do Instagram, de 3 mil para mais de 13 mil seguidores" } },
@@ -167,6 +168,9 @@ window.CONTENT = {
 
   /* Events timeline (public information) */
   events: [
+    { year: "2027", items: [
+      { name: "Greener Summit 2027", note: { en: "9th edition · Sep 21–22 · in production, early-bird campaign live", pt: "9ª edição · 21 e 22/set · em produção, campanha de early bird no ar" }, slug: "greener-summit" }
+    ]},
     { year: "2026", items: [
       { name: "Greener Summit 2026", note: { en: "8th edition · \"The New Energy Economy\" · Jul 21–22 · AMCHAM São Paulo · 200+ participants, 40+ speakers", pt: "8ª edição · \"A Nova Economia da Energia\" · 21 e 22/jul · AMCHAM São Paulo · 200+ participantes, 40+ palestrantes" }, slug: "greener-summit" },
       { name: "Imersão Greener", note: { en: "LRCAP Batteries (Sep 14–15) and BESS C&I Financial Modelling (Oct 19–20) · small, exclusive classes", pt: "LRCAP Baterias (14 e 15/set) e Modelagem Financeira BESS C&I (19 e 20/out) · turmas reduzidas e exclusivas" }, slug: "imersao-greener" },
@@ -245,22 +249,22 @@ window.CONTENT = {
       team: {
         core: [{ name: "Marco Conte", note: { en: "Project Owner, 2023–25", pt: "Project Owner, 2023–25" } }, { name: "Silvana Silvestre", note: { en: "sales & relationships", pt: "comercial e relacionamento" } }, { name: "Mateus Pinheiro", note: { en: "content, 2022–25", pt: "conteúdo, 2022–25" } }, { me: true, note: { en: "marketing & design", pt: "marketing e design" } }],
         copy: [{ name: "Mateus Pinheiro", years: "2022–25" }, { name: "Larissa Maria", years: "2025–26" }],
-        design: [{ me: true, years: "2022–23" }, { name: "Renan Corazza", years: "2023–26" }, { name: "Arthur Laprano", years: "2023–25" }]
+        design: [{ me: true, years: "2022–23" }, { name: "Renan Corazza", years: "2023–26" }, { name: "Arthur Laprano", years: "2023–25" }, { name: "Viviane Custódio", years: "2026" }]
       },
       feature: { src: IMG("system/17.jpg"),
-        caption: { en: "One of the \"four pillars\" of Greener Summit: Marco Conte, the event's Project Owner from 2023 to 2025, had plaques made for himself, me, Mateus Pinheiro and Silvana Silvestre, the four of us who made three editions happen side by side.",
-                   pt: "Um dos \"quatro pilares\" do Greener Summit: Marco Conte, Project Owner do evento de 2023 a 2025, fez placas para si, para mim, para Mateus Pinheiro e para Silvana Silvestre, os quatro que fizeram três edições acontecerem lado a lado." } },
+        caption: { en: "One of the \"four pillars\" of Greener Summit: Marco Conte, the event's Project Owner from 2023 to 2025, had plaques made for himself, me, Mateus Pinheiro and Silvana Silvestre, the four of us who made most editions happen side by side.",
+                   pt: "Um dos \"quatro pilares\" do Greener Summit: Marco Conte, Project Owner do evento de 2023 a 2025, fez placas para si, para mim, para Mateus Pinheiro e para Silvana Silvestre, os quatro que fizeram a maioria das edições acontecer lado a lado." } },
       cat: "events",
       title: { en: "Greener Summit", pt: "Greener Summit" },
-      kicker: { en: "Five editions, one identity", pt: "Cinco edições, uma identidade" },
-      year: "2022 — 2026",
+      kicker: { en: "Six editions, one identity", pt: "Seis edições, uma identidade" },
+      year: "2022 — 2027",
       client: "Greener",
       role: { en: "Head of Marketing & Design", pt: "Head de Marketing e Design" },
       place: "AMCHAM · São Paulo",
       link: "https://www.greenersummit.com.br",
       cover: IMG("summit/26-01.jpg"),
       stats: [
-        { value: "5", label: { en: "editions led, 2022–2026", pt: "edições lideradas, 2022–2026" } },
+        { value: "6", label: { en: "editions led, 2022–2027 (2027 in production)", pt: "edições lideradas, 2022–2027 (2027 em produção)" } },
         { value: "200+", label: { en: "participants in 2026", pt: "participantes em 2026" } },
         { value: "130+", label: { en: "companies in 2026", pt: "empresas em 2026" } },
         { value: "40+", label: { en: "speakers, 12+ hours of content", pt: "palestrantes, 12+ horas de conteúdo" } },
@@ -301,9 +305,9 @@ window.CONTENT = {
       ],
       compare: {
         before: { label: { en: "Before · 2018–2019 identity", pt: "Antes · identidade de 2018–2019" }, images: [IMG("summit/19-01.jpg"), IMG("summit/18-01.jpg"), IMG("summit/19-02.jpg"), IMG("summit/18-02.jpg")] },
-        after: { label: { en: "After · 2022 rebrand, still the base today", pt: "Depois · rebranding de 2022, base até hoje" }, images: [IMG("summit/22-01.jpg"), IMG("summit/22-02.jpg"), IMG("summit/25-01.jpg"), IMG("summit/23-01.jpg")] }
+        after: { label: { en: "After · 2022 rebrand, still the base today", pt: "Depois · rebranding de 2022, base até hoje" }, images: [IMG("summit/22-01.jpg"), IMG("summit/26-01.jpg"), IMG("summit/25-01.jpg"), IMG("summit/24-01.jpg")] }
       },
-      images: [...range("summit", 9, "26-"), ...range("summit", 10, "25-"), IMG("system/15.jpg"), ...range("summit", 8, "24-"), IMG("summit/23-01.jpg"), ...range("summit", 5, "22-")],
+      images: [...range("summit", 9, "26-"), ...range("summit", 10, "25-"), IMG("system/15.jpg"), ...range("summit", 8, "24-"), IMG("summit/23-02.jpg"), IMG("summit/23-03.jpg"), IMG("summit/23-04.jpg"), IMG("summit/23-05.jpg"), IMG("summit/23-06.jpg"), IMG("summit/23-07.jpg"), ...range("summit", 5, "22-")],
       sets: [
         { title: { en: "Identity system", pt: "Sistema de identidade" },
           note: { en: "Brand board, the 20 × 5 m stage backdrop, badges by attendee type, totems, table prisms, a colour-coded attendee guide and the 2025 backdrops.", pt: "Brand board, a lona de palco de 20 × 5 m, crachás por tipo de participante, totens, prismas de mesa, um guia de identificação por cores e os backdrops de 2025." },
@@ -460,7 +464,8 @@ window.CONTENT = {
         ...range("igd", 5),
         "https://lauraslineart.weebly.com/uploads/1/4/5/8/145887954/20230920-183528610-ios-1_orig.jpg",
         "https://lauraslineart.weebly.com/uploads/1/4/5/8/145887954/editor/20230920-165448280-ios.jpg",
-        "https://lauraslineart.weebly.com/uploads/1/4/5/8/145887954/published/greener-insights-2709-3.png"
+        IMG("igd/06.jpg"),
+        IMG("igd/07.jpg")
       ]
     },
     {
@@ -497,6 +502,7 @@ window.CONTENT = {
     },
     {
       slug: "webinars",
+      coverFit: "contain",
       team: { copy: [{ name: "Mateus Pinheiro", years: "2022–25" }, { name: "Larissa Maria", years: "2025–26" }], design: [{ me: true, years: "2021–23" }, { name: "Renan Corazza", years: "2023–26" }, { name: "Arthur Laprano", years: "2023–25" }, { name: "Viviane Custódio", years: "2026" }] },
       cat: "brand",
       title: { en: "Webinars & live streams", pt: "Webinars e transmissões" },
@@ -508,6 +514,9 @@ window.CONTENT = {
       link: "https://www.youtube.com/@greenerbr",
       cover: IMG("webinar/01.jpg"),
       stats: [
+        { value: "12", label: { en: "live streams in 2026", pt: "transmissões ao vivo em 2026" } },
+        { value: "2.7K+", label: { en: "webinar registrations in 2026 (RD Station)", pt: "inscrições em webinars em 2026 (RD Station)" } },
+        { value: "240", label: { en: "peak live viewers · Greener & EPE webinar, 2,295 views", pt: "pico ao vivo · webinar Greener e EPE, 2.295 visualizações" } },
         { value: "68K+", label: { en: "YouTube views", pt: "visualizações no YouTube" } },
         { value: "340K+", label: { en: "impressions", pt: "impressões" } },
         { value: "13K+", label: { en: "watch hours", pt: "horas assistidas" } }
@@ -520,13 +529,13 @@ window.CONTENT = {
         en: [
           "Webinars are how Greener releases its studies and talks to the market every month. I plan the calendar, direct the visual package, set up the landing pages and email invitations, run the stream and moderate the questions.",
           "Since 2022 the visual package has included motion graphics made in After Effects (animated backgrounds, countdowns, lower thirds and \"it's today\" announcements), created by me and by designers on my team, Arthur Laprano and Renan Corazza, under my supervision.",
-          "In 2026 this included Conexão BESS, a monthly series on selling, sizing and pricing battery storage, and the launch webinars for the SED 2026 and Energy Storage 2027 studies. Across the channel, the webinars I coordinated passed 68K views, 340K impressions and 13K watch hours.",
+          "In 2026 the channel ran 12 live streams with 9.8K views and 2,700+ registrations through RD Station forms; the top one, the webinar with EPE, reached 2,295 views and 240 people watching live at its peak. This included Conexão BESS, a monthly series on selling, sizing and pricing battery storage, and the launch webinars for the SED 2026 and Energy Storage 2027 studies. Across the channel, the webinars I coordinated passed 68K views, 340K impressions and 13K watch hours.",
           "I also managed the campaigns for Greener's online Energy Storage course, with copy by Larissa Maria and design by Renan Corazza and Viviane Custódio."
         ],
         pt: [
           "Os webinars são a forma como a Greener lança seus estudos e conversa com o mercado todo mês. Planejo o calendário, dirijo o pacote visual, monto as landing pages e os convites por e-mail, conduzo a transmissão e modero as perguntas.",
           "Desde 2022 o pacote visual inclui motion graphics feitos no After Effects (fundos animados, contagens regressivas, lower thirds e chamadas de \"é hoje\"), criados por mim e pelos designers do meu time Arthur Laprano e Renan Corazza, sob minha supervisão.",
-          "Em 2026 isso incluiu o Conexão BESS, série mensal sobre vender, dimensionar e precificar armazenamento, e os webinars de lançamento dos estudos SED 2026 e Armazenamento 2027. No canal, os webinars que coordenei passaram de 68 mil visualizações, 340 mil impressões e 13 mil horas assistidas.",
+          "Em 2026 o canal teve 12 transmissões ao vivo, com 9,8 mil visualizações e mais de 2.700 inscrições pelos formulários do RD Station; a maior delas, o webinar com a EPE, chegou a 2.295 visualizações e 240 pessoas assistindo ao vivo no pico. Isso incluiu o Conexão BESS, série mensal sobre vender, dimensionar e precificar armazenamento, e os webinars de lançamento dos estudos SED 2026 e Armazenamento 2027. No canal, os webinars que coordenei passaram de 68 mil visualizações, 340 mil impressões e 13 mil horas assistidas.",
           "Também geri as campanhas do Curso de Armazenamento de Energia online da Greener, com copy de Larissa Maria e artes de Renan Corazza e Viviane Custódio."
         ]
       },
@@ -547,6 +556,7 @@ window.CONTENT = {
     },
     {
       slug: "greener-website",
+      coverFit: "contain",
       team: {
         mgmt: [{ me: true }],
         design: [{ name: "Renan Corazza" }, { me: true }, { name: "Viviane Custódio" }],
@@ -586,6 +596,7 @@ window.CONTENT = {
     },
     {
       slug: "greener-studies",
+      coverFit: "contain",
       team: { copy: [{ name: "Mateus Pinheiro", years: "2022–25" }, { name: "Larissa Maria", years: "2025–26" }], design: [{ me: true, years: "2021–23" }, { name: "Renan Corazza", years: "2023–26" }, { name: "Arthur Laprano", years: "2023–25" }, { name: "Viviane Custódio", years: "2026" }] },
       cat: "editorial",
       title: { en: "Greener Studies & Insights", pt: "Estudos e Artigos Greener" },
@@ -649,6 +660,7 @@ window.CONTENT = {
     },
     {
       slug: "greener-brand",
+      coverFit: "contain",
       team: { copy: [{ name: "Mateus Pinheiro", years: "2022–25" }, { name: "Larissa Maria", years: "2025–26" }], design: [{ me: true, years: "2021–23" }, { name: "Renan Corazza", years: "2023–26" }, { name: "Arthur Laprano", years: "2023–25" }, { name: "Viviane Custódio", years: "2026" }] },
       cat: "brand",
       title: { en: "Greener — Brand & Growth", pt: "Greener — Marca e Growth" },
@@ -684,6 +696,7 @@ window.CONTENT = {
     },
     {
       slug: "kpop-banners",
+      coverFit: "contain",
       cat: "illustration",
       title: { en: "K-pop fan banners", pt: "Banners de fãs de K-pop" },
       kicker: { en: "Illustrated banners for two Dreamcatcher Company shows", pt: "Banners ilustrados para dois shows da Dreamcatcher Company" },
@@ -705,12 +718,12 @@ window.CONTENT = {
         en: [
           "Fan banners are a K-pop tradition: the crowd raises them at a planned moment of the show as a message to the artists. These two were voluntary projects for the fan community, each approved by Dreamcatcher Company before being printed and handed out: 4,000 banners in total. At the end of the shows, the artists picked up the banners and took photos with them.",
           "UAU, the Dreamcatcher subunit formed by JiU, SuA and Yoohyeon, played São Paulo on August 15, 2025, on the \"Playlist #You Are You\" tour. The front carries a Korean message around \"Good Luck\", with the fandom's lightsticks and the group's mascots; the back shows the three members and the instructions for the crowd.",
-          "ChRocktikal's first world tour, \"CRTK: The Beginning\", reached São Paulo on June 21, 2026, produced by Highway Star. The front shows the band with the line \"CRTK you've awakened us\"; the back is a vintage radio with the instructions. Highway Star invited our fanbase to interview the band, and we published it with Dreamcatcher Company's authorization on YouTube, X and Instagram (@crtkupdates). I conducted the interview in Portuguese, English and Korean, with an on-site interpreter for the Portuguese–Korean exchanges; recording and editing are by Luisa Krummenauer, who manages @crtkupdates with me. The video passed 1,000 views on YouTube."
+          "ChRocktikal's first world tour, \"CRTK: The Beginning\", reached São Paulo on June 21, 2026, produced by Highway Star. The front shows the band with the line \"CRTK you've awakened us\"; the back is a vintage radio with the instructions. Highway Star invited our fanbase to interview the band, and we published it with Dreamcatcher Company's authorization on YouTube, X and Instagram (@crtkupdates). I conducted the interview in Portuguese, English and Korean, with an on-site interpreter for the Portuguese–Korean exchanges; recording and editing are by Luisa Krummenauer, who manages @crtkupdates with me. The video passed 1,000 views on YouTube. Show photos by Highway Star."
         ],
         pt: [
           "Banners de fãs são uma tradição do K-pop: o público os ergue em um momento combinado do show, como uma mensagem para os artistas. Estes dois foram projetos voluntários para a comunidade de fãs, cada um aprovado pela Dreamcatcher Company antes de ser impresso e distribuído: 4 mil banners no total. No fim dos shows, os artistas pegaram os banners e tiraram fotos com eles.",
           "O UAU, subunit do Dreamcatcher formada por JiU, SuA e Yoohyeon, se apresentou em São Paulo em 15 de agosto de 2025, na turnê \"Playlist #You Are You\". A frente traz uma mensagem em coreano em torno de \"Good Luck\", com os lightsticks do fandom e os mascotes do grupo; o verso mostra as três integrantes e as instruções para o público.",
-          "A primeira turnê mundial do ChRocktikal, \"CRTK: The Beginning\", chegou a São Paulo em 21 de junho de 2026, com produção da Highway Star. A frente mostra a banda com a frase \"CRTK you've awakened us\"; o verso é um rádio antigo com as instruções. A Highway Star convidou nossa fanbase para entrevistar a banda, e publicamos com autorização da Dreamcatcher Company no YouTube, no X e no Instagram (@crtkupdates). Conduzi a entrevista em português, inglês e coreano, com uma tradutora no local para as trocas entre português e coreano; a gravação e a edição são de Luisa Krummenauer, que gerencia o @crtkupdates comigo. O vídeo passou de mil visualizações no YouTube."
+          "A primeira turnê mundial do ChRocktikal, \"CRTK: The Beginning\", chegou a São Paulo em 21 de junho de 2026, com produção da Highway Star. A frente mostra a banda com a frase \"CRTK you've awakened us\"; o verso é um rádio antigo com as instruções. A Highway Star convidou nossa fanbase para entrevistar a banda, e publicamos com autorização da Dreamcatcher Company no YouTube, no X e no Instagram (@crtkupdates). Conduzi a entrevista em português, inglês e coreano, com uma tradutora no local para as trocas entre português e coreano; a gravação e a edição são de Luisa Krummenauer, que gerencia o @crtkupdates comigo. O vídeo passou de mil visualizações no YouTube. Fotos do show: Highway Star."
         ]
       },
       deliverables: {
@@ -718,7 +731,7 @@ window.CONTENT = {
         pt: ["Ilustração de personagens", "Mascotes e lightsticks", "Banners frente e verso", "Arte final para impressão", "Entrevista com a banda"]
       },
       videos: [{ yt: "-jbwgi1w-os", title: { en: "My interview with CRTK", pt: "Minha entrevista com o CRTK" } }],
-      images: [...range("kpop", 5, "crtk-"), ...range("kpop", 6, "uau-")]
+      images: [...range("kpop", 5, "crtk-"), ...range("kpop", 7, "show-"), ...range("kpop", 6, "uau-")]
     },
     {
       slug: "florescer",
@@ -792,8 +805,8 @@ window.CONTENT = {
   ],
 
   /* Order shown on the home grid (first two are large) */
-  featured: ["greener-summit", "imersao-greener", "kpop-banners", "meet-and-greener", "armazenamento-2025", "florescer", "webinars", "greener-studies"],
-  more: ["imersao-gd", "cafe-com-investidores", "greener-website", "marketing-ops", "greener-brand", "early-work"],
+  featured: ["greener-summit", "imersao-greener", "kpop-banners", "meet-and-greener", "armazenamento-2025", "greener-website", "webinars", "greener-studies"],
+  more: ["imersao-gd", "cafe-com-investidores", "florescer", "marketing-ops", "greener-brand", "early-work"],
 
   strengths: [
     { title: { en: "Brand & visual identity", pt: "Marca e identidade visual" },

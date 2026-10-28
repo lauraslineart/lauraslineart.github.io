@@ -450,3 +450,21 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 .feature-fig img { width: 100%; height: auto; border-radius: 2px; }
 .feature-fig figcaption { font-size: .88rem; color: var(--soft); line-height: 1.5; }
 @media (max-width: 560px) { .feature-fig { grid-template-columns: 1fr; } }
+
+/* covers that carry text: show the whole piece over a blurred backdrop instead of cropping it */
+.card .frame.contain::before { content: ""; position: absolute; inset: -24px; background: var(--cbg) center / cover no-repeat; filter: blur(22px) brightness(.5) saturate(1.1); }
+.card .frame.contain img { position: relative; object-fit: contain; padding: 4%; filter: drop-shadow(0 10px 24px rgba(0,0,0,.35)); }
+
+/* photo carousel for long galleries */
+.carousel { position: relative; }
+.c-track { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; padding-bottom: 2px; }
+.c-track::-webkit-scrollbar { display: none; }
+.c-slide { flex: 0 0 auto; margin: 0; scroll-snap-align: start; height: clamp(240px, 40vw, 520px); border-radius: 2px; overflow: hidden; background: var(--surface); }
+.c-slide .zoom { height: 100%; display: block; }
+.c-slide img { height: 100%; width: auto; max-width: none; display: block; }
+.c-ui { display: flex; align-items: center; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+.c-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--fg); font-size: 1.1rem; cursor: pointer; }
+.c-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.c-count { color: var(--soft); min-width: 64px; text-align: center; }
+.c-hint { color: var(--soft); margin-left: auto; }
+@media (max-width: 600px) { .c-hint { display: none; } .c-slide { height: 300px; } }
