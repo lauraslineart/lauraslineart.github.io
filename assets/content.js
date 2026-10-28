@@ -359,7 +359,7 @@ window.CONTENT = {
       team: { copy: [{ name: "Larissa Maria" }], design: [{ name: "Viviane Custódio" }] },
       cat: "events",
       title: { en: "Imersão Greener", pt: "Imersão Greener" },
-      kicker: { en: "Hands-on immersions for the storage market", pt: "Imersões práticas para o mercado de armazenamento" },
+      kicker: { en: "Greener's new education event and its main bet for 2027", pt: "O novo evento de educação da Greener e sua grande aposta para 2027" },
       year: "2026",
       client: "Greener",
       role: { en: "Head of Marketing & Design", pt: "Head de Marketing e Design" },
@@ -367,8 +367,8 @@ window.CONTENT = {
       link: "https://greener.com.br/imersao-bess-cni",
       cover: IMG("imersao/p01.jpg"),
       summary: {
-        en: "Two-day, small-group immersions on battery storage: LRCAP Batteries in September and BESS C&I Financial Modelling in October 2026.",
-        pt: "Imersões presenciais de dois dias, em turma reduzida, sobre armazenamento em baterias: LRCAP Baterias em setembro e Modelagem Financeira BESS C&I em outubro de 2026."
+        en: "Greener's newest event and its main bet for 2027: two-day, deliberately small and exclusive immersions on battery storage. LRCAP Batteries ran in September and BESS C&I Financial Modelling in October 2026.",
+        pt: "O evento mais novo da Greener e sua grande aposta para 2027: imersões presenciais de dois dias, em turmas propositalmente reduzidas e exclusivas, sobre armazenamento em baterias. LRCAP Baterias aconteceu em setembro e Modelagem Financeira BESS C&I em outubro de 2026."
       },
       body: {
         en: [
@@ -792,8 +792,8 @@ window.CONTENT = {
   ],
 
   /* Order shown on the home grid (first two are large) */
-  featured: ["greener-summit", "cafe-com-investidores", "kpop-banners", "meet-and-greener", "armazenamento-2025", "florescer", "webinars", "greener-studies"],
-  more: ["imersao-gd", "imersao-greener", "greener-website", "marketing-ops", "greener-brand", "early-work"],
+  featured: ["greener-summit", "imersao-greener", "kpop-banners", "meet-and-greener", "armazenamento-2025", "florescer", "webinars", "greener-studies"],
+  more: ["imersao-gd", "cafe-com-investidores", "greener-website", "marketing-ops", "greener-brand", "early-work"],
 
   strengths: [
     { title: { en: "Brand & visual identity", pt: "Marca e identidade visual" },
