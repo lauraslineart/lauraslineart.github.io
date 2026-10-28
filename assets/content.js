@@ -6,6 +6,7 @@
    ============================================================ */
 
 const IMG = (p) => `assets/img/${p}`;
+const pages = (dir, n) => Array.from({ length: n }, (_, i) => `assets/doc/${dir}/${String(i + 1).padStart(2, "0")}.jpg`);
 const VID = (name) => ({ src: `assets/video/${name}.mp4`, poster: `assets/video/${name}.jpg` });
 const range = (dir, n, prefix = "") =>
   Array.from({ length: n }, (_, i) => IMG(`${dir}/${prefix}${String(i + 1).padStart(2, "0")}.jpg`));
@@ -118,6 +119,8 @@ window.CONTENT = {
     visit: { en: "Visit", pt: "Acessar" },
     next: { en: "Next project", pt: "Próximo projeto" },
     imgSoon: { en: "Images coming soon", pt: "Imagens em breve" },
+    docRead: { en: "Read full screen", pt: "Ler em tela cheia" },
+    docPdf: { en: "Open the PDF", pt: "Abrir o PDF" },
     footer: { en: "Designed and written by Laura Magrin.", pt: "Design e textos por Laura Magrin." }
   },
 
@@ -309,15 +312,20 @@ window.CONTENT = {
       },
       images: [...range("summit", 9, "26-"), ...range("summit", 10, "25-"), IMG("system/15.jpg"), ...range("summit", 8, "24-"), IMG("summit/23-02.jpg"), IMG("summit/23-03.jpg"), IMG("summit/23-04.jpg"), IMG("summit/23-05.jpg"), IMG("summit/23-06.jpg"), IMG("summit/23-07.jpg"), ...range("summit", 5, "22-")],
       sets: [
-        { title: { en: "Identity system", pt: "Sistema de identidade" },
-          note: { en: "Brand board, the 20 × 5 m stage backdrop, badges by attendee type, totems, table prisms, a colour-coded attendee guide and the 2025 backdrops.", pt: "Brand board, a lona de palco de 20 × 5 m, crachás por tipo de participante, totens, prismas de mesa, um guia de identificação por cores e os backdrops de 2025." },
-          images: [IMG("system/01.jpg"), IMG("system/02.jpg"), IMG("system/03.jpg"), IMG("system/04.jpg"), IMG("system/07.jpg"), IMG("system/05.jpg"), IMG("system/06.jpg"), IMG("system/16.jpg")] },
+        { title: { en: "Identity system · 2025–2026", pt: "Sistema de identidade · 2025–2026" },
+          note: { en: "How the identity lands on site in the two latest editions: welcome backdrops, badges by attendee type, totems along the venue, sponsor screens and the 2025 stage and backdrop.", pt: "Como a identidade aparece no evento nas duas últimas edições: backdrops de boas-vindas, crachás por tipo de participante, totens pelo espaço, telas de patrocinadores e o palco e o backdrop de 2025." },
+          images: [IMG("system/id26-01.jpg"), IMG("system/id26-02.jpg"), IMG("system/id26-03.jpg"), IMG("system/id26-07.jpg"), IMG("system/id26-04.jpg"), IMG("system/id26-05.jpg"), IMG("system/id26-06.jpg"), IMG("system/id26-08.jpg"), IMG("system/05.jpg"), IMG("system/06.jpg")] },
         { title: { en: "2026 campaign", pt: "Campanha 2026" },
           note: { en: "\"The New Energy Economy\": key visual, speaker announcements, a hands-on workshop and the early-bird launch of the 2027 edition.", pt: "\"A Nova Economia da Energia\": key visual, anúncios de speakers, um workshop prático e o early bird da edição 2027." },
-          images: [IMG("system/09.jpg"), IMG("system/12.jpg"), IMG("system/10.jpg"), IMG("system/11.jpg"), IMG("system/14.jpg"), IMG("system/13.jpg")] },
-        { title: { en: "2026 overview for sponsors", pt: "Overview 2026 para patrocinadores" },
-          note: { en: "The post-event deck: audience, reach and results, and how each sponsor's brand showed up on site.", pt: "O material pós-evento: público, alcance e resultados, e como a marca de cada patrocinador apareceu no evento." },
-          images: [IMG("system/18.jpg"), IMG("system/19.jpg"), IMG("system/20.jpg"), IMG("system/21.jpg"), IMG("system/22.jpg"), IMG("system/23.jpg")] }
+          images: [IMG("system/09.jpg"), IMG("system/12.jpg"), IMG("system/10.jpg"), IMG("system/11.jpg"), IMG("system/14.jpg"), IMG("system/13.jpg")] }
+      ],
+      docs: [
+        { title: { en: "2026 overview", pt: "Overview 2026" },
+          note: { en: "The full post-event deck for sponsors: audience, programme, reach and results, and how each sponsor's brand showed up on site.", pt: "O material pós-evento completo para patrocinadores: público, programação, alcance e resultados, e como a marca de cada patrocinador apareceu no evento." },
+          pdf: "docs/Greener-Summit-2026-Overview.pdf", size: "5.5 MB", pages: pages("summit26", 42) },
+        { title: { en: "2025 overview", pt: "Overview 2025" },
+          note: { en: "The public overview of the 2025 edition, \"From Solar to the Future\".", pt: "O overview público da edição 2025, \"Do Solar para o Futuro\"." },
+          pdf: "docs/Greener-Summit-2025-Overview.pdf", size: "2.6 MB", pages: pages("summit25", 26) }
       ]
     },
     {
@@ -502,7 +510,6 @@ window.CONTENT = {
     },
     {
       slug: "webinars",
-      coverFit: "contain",
       team: { copy: [{ name: "Mateus Pinheiro", years: "2022–25" }, { name: "Larissa Maria", years: "2025–26" }], design: [{ me: true, years: "2021–23" }, { name: "Renan Corazza", years: "2023–26" }, { name: "Arthur Laprano", years: "2023–25" }, { name: "Viviane Custódio", years: "2026" }] },
       cat: "brand",
       title: { en: "Webinars & live streams", pt: "Webinars e transmissões" },
@@ -512,7 +519,7 @@ window.CONTENT = {
       role: { en: "Coordination, design & moderation", pt: "Coordenação, design e moderação" },
       place: "YouTube · LinkedIn Live",
       link: "https://www.youtube.com/@greenerbr",
-      cover: IMG("webinar/01.jpg"),
+      cover: IMG("covers/webinars.jpg"),
       stats: [
         { value: "12", label: { en: "live streams in 2026", pt: "transmissões ao vivo em 2026" } },
         { value: "2.7K+", label: { en: "webinar registrations in 2026 (RD Station)", pt: "inscrições em webinars em 2026 (RD Station)" } },
@@ -556,7 +563,6 @@ window.CONTENT = {
     },
     {
       slug: "greener-website",
-      coverFit: "contain",
       team: {
         mgmt: [{ me: true }],
         design: [{ name: "Renan Corazza" }, { me: true }, { name: "Viviane Custódio" }],
@@ -591,12 +597,11 @@ window.CONTENT = {
         en: ["Project management", "Visual direction", "Layouts", "Front-end via vibe coding", "Landing pages", "Vibe coding", "Web app prototype (2027)", "Forms & RD Station integration"],
         pt: ["Gestão do projeto", "Direção visual", "Layouts", "Front-end via vibe coding", "Landing pages", "Vibe coding", "Protótipo de web app (2027)", "Formulários e integração com RD Station"]
       },
-      cover: IMG("web/01.jpg"),
+      cover: IMG("covers/website.jpg"),
       images: [IMG("web/01.jpg"), IMG("web/02.jpg"), IMG("web/03.jpg"), IMG("web/tall-02.jpg"), IMG("web/04.jpg"), IMG("web/05.jpg"), IMG("web/06.jpg"), IMG("web/07.jpg")]
     },
     {
       slug: "greener-studies",
-      coverFit: "contain",
       team: { copy: [{ name: "Mateus Pinheiro", years: "2022–25" }, { name: "Larissa Maria", years: "2025–26" }], design: [{ me: true, years: "2021–23" }, { name: "Renan Corazza", years: "2023–26" }, { name: "Arthur Laprano", years: "2023–25" }, { name: "Viviane Custódio", years: "2026" }] },
       cat: "editorial",
       title: { en: "Greener Studies & Insights", pt: "Estudos e Artigos Greener" },
@@ -606,7 +611,7 @@ window.CONTENT = {
       role: { en: "Head of Marketing & Design", pt: "Head de Marketing e Design" },
       place: "Editorial · Web",
       link: "https://greener.com.br/greener-insights",
-      cover: IMG("studies/01.jpg"),
+      cover: IMG("covers/studies.jpg"),
       summary: {
         en: "Editorial design, data visuals and launch campaigns for Greener's studies, from the DG study to the SED Study, the LRCAP Storage Outlook and the Storage Study 2027.",
         pt: "Design editorial, visual de dados e campanhas de lançamento dos estudos da Greener, do estudo de GD ao Estudo SED, ao Outlook LRCAP Armazenamento e ao Estudo de Armazenamento 2027."
@@ -660,7 +665,6 @@ window.CONTENT = {
     },
     {
       slug: "greener-brand",
-      coverFit: "contain",
       team: { copy: [{ name: "Mateus Pinheiro", years: "2022–25" }, { name: "Larissa Maria", years: "2025–26" }], design: [{ me: true, years: "2021–23" }, { name: "Renan Corazza", years: "2023–26" }, { name: "Arthur Laprano", years: "2023–25" }, { name: "Viviane Custódio", years: "2026" }] },
       cat: "brand",
       title: { en: "Greener — Brand & Growth", pt: "Greener — Marca e Growth" },
@@ -669,7 +673,7 @@ window.CONTENT = {
       client: "Greener",
       role: { en: "Lead designer, art director, team lead", pt: "Designer principal, diretora de arte, líder do time" },
       place: "Vila Olímpia · São Paulo",
-      cover: IMG("brand/09.jpg"),
+      cover: IMG("covers/brand.jpg"),
       stats: [
         { value: "3K → 13K", label: { en: "Instagram followers", pt: "seguidores no Instagram" } },
         { value: "2K → 12K", label: { en: "LinkedIn followers", pt: "seguidores no LinkedIn" } }
@@ -696,7 +700,6 @@ window.CONTENT = {
     },
     {
       slug: "kpop-banners",
-      coverFit: "contain",
       cat: "illustration",
       title: { en: "K-pop fan banners", pt: "Banners de fãs de K-pop" },
       kicker: { en: "Illustrated banners for two Dreamcatcher Company shows", pt: "Banners ilustrados para dois shows da Dreamcatcher Company" },
@@ -704,7 +707,7 @@ window.CONTENT = {
       client: { en: "Voluntary fan projects · approved by Dreamcatcher Company", pt: "Projetos voluntários de fã · aprovados pela Dreamcatcher Company" },
       role: { en: "Illustrator, designer & interviewer", pt: "Ilustradora, designer e entrevistadora" },
       place: "São Paulo",
-      cover: IMG("kpop/crtk-01.jpg"),
+      cover: IMG("kpop/crtk-03.jpg"),
       stats: [
         { value: "2", label: { en: "shows in São Paulo", pt: "shows em São Paulo" } },
         { value: "4,000", label: { en: "banners printed and handed out to the crowd", pt: "banners impressos e distribuídos ao público" } },
@@ -734,6 +737,41 @@ window.CONTENT = {
       images: [...range("kpop", 5, "crtk-"), ...range("kpop", 7, "show-"), ...range("kpop", 6, "uau-")]
     },
     {
+      slug: "illustrations",
+      cat: "illustration",
+      title: { en: "Illustration", pt: "Ilustração" },
+      kicker: { en: "Personal digital painting, portraits and sketches", pt: "Pintura digital autoral, retratos e sketches" },
+      year: "2022 — 2024",
+      client: { en: "Personal work", pt: "Trabalho autoral" },
+      role: { en: "Illustrator", pt: "Ilustradora" },
+      cover: IMG("illus/01.jpg"),
+      coverPos: "50% 22%",
+      summary: {
+        en: "My personal illustration: digital portraits and characters, from finished paintings to loose sketches.",
+        pt: "Minha ilustração autoral: retratos e personagens digitais, de pinturas finalizadas a sketches soltos."
+      },
+      body: {
+        en: [
+          "Alongside design and marketing, I keep a personal illustration practice: digital portraits and characters, exploring light, colour and expression.",
+          "The selection goes from finished paintings to the line sketches where each piece starts. The same hand is behind the K-pop fan banners and the Florescer guidebook below."
+        ],
+        pt: [
+          "Paralelamente ao design e ao marketing, mantenho uma prática autoral de ilustração: retratos e personagens digitais, explorando luz, cor e expressão.",
+          "A seleção vai das pinturas finalizadas aos sketches de linha onde cada peça começa. É a mesma mão por trás dos banners de fãs de K-pop e do livro-guia Florescer, logo abaixo."
+        ]
+      },
+      deliverables: {
+        en: ["Digital painting", "Portraits", "Character design", "Sketches"],
+        pt: ["Pintura digital", "Retratos", "Design de personagens", "Sketches"]
+      },
+      images: range("illus", 10),
+      related: {
+        title: { en: "Illustration projects", pt: "Projetos de ilustração" },
+        note: { en: "Where illustration became a project of its own.", pt: "Onde a ilustração virou um projeto completo." },
+        slugs: ["kpop-banners", "florescer"]
+      }
+    },
+    {
       slug: "florescer",
       cat: "illustration",
       title: { en: "Florescer", pt: "Florescer" },
@@ -743,7 +781,8 @@ window.CONTENT = {
       role: { en: "Author, creative director, concept artist", pt: "Autora, diretora criativa, concept artist" },
       place: "Bauru · São Paulo",
       link: "https://canva.link/7kbpi5y3nptv9l4",
-      cover: IMG("florescer/03.jpg"),
+      cover: IMG("florescer/05.jpg"),
+      coverPos: "50% 18%",
       stats: [
         { value: "49", label: { en: "page playable guidebook", pt: "páginas de livro-guia jogável" } },
         { value: "150", label: { en: "page academic report", pt: "páginas de relatório acadêmico" } }
@@ -765,10 +804,15 @@ window.CONTENT = {
         ]
       },
       deliverables: {
-        en: ["Concept art", "Character design", "Maps & worldbuilding", "Editorial design"],
-        pt: ["Concept art", "Design de personagens", "Mapas e worldbuilding", "Design editorial"]
+        en: ["Concept art", "Character design", "Worldbuilding", "Editorial design"],
+        pt: ["Concept art", "Design de personagens", "Worldbuilding", "Design editorial"]
       },
-      images: range("florescer", 9)
+      images: ["01", "02", "04", "05", "07", "08", "09"].map((n) => IMG(`florescer/${n}.jpg`)),
+      docs: [
+        { title: { en: "The published book", pt: "O livro publicado" },
+          note: { en: "The full 49-page playable guidebook. Flip through it here or open the PDF.", pt: "O livro-guia jogável completo, com 49 páginas. Folheie aqui ou abra o PDF." },
+          pdf: "docs/Florescer-Ebook.pdf", size: "8.6 MB", portrait: true, pages: pages("florescer", 49) }
+      ]
     },
     {
       slug: "early-work",
@@ -806,7 +850,7 @@ window.CONTENT = {
 
   /* Order shown on the home grid (first two are large) */
   featured: ["greener-summit", "imersao-greener", "kpop-banners", "meet-and-greener", "armazenamento-2025", "greener-website", "webinars", "greener-studies"],
-  more: ["imersao-gd", "cafe-com-investidores", "florescer", "marketing-ops", "greener-brand", "early-work"],
+  more: ["illustrations", "imersao-gd", "cafe-com-investidores", "florescer", "marketing-ops", "greener-brand", "early-work"],
 
   strengths: [
     { title: { en: "Brand & visual identity", pt: "Marca e identidade visual" },

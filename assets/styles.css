@@ -399,8 +399,10 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 /* ---------- portrait ---------- */
 .me { margin: 0 0 28px; position: relative; max-width: 420px; }
 .me img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 4px; box-shadow: 0 24px 60px rgba(110,16,35,.18); }
-.me::before { content: ""; position: absolute; inset: 14px -14px 18px 14px; border: 1px solid var(--wine); border-radius: 4px; z-index: -1; opacity: .35; }
-.me figcaption { margin-top: 10px; color: var(--soft); font-size: .88rem; }
+.me-ph { position: relative; z-index: 0; }
+.me-ph img { display: block; }
+.me-ph::before { content: ""; position: absolute; inset: 14px -14px -14px 14px; border: 1px solid var(--wine); border-radius: 4px; z-index: -1; opacity: .35; }
+.me figcaption { margin-top: 30px; color: var(--soft); font-size: .88rem; }
 
 /* ---------- press list ---------- */
 .press-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 24px; margin-bottom: 14px; }
@@ -468,3 +470,23 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 .c-count { color: var(--soft); min-width: 64px; text-align: center; }
 .c-hint { color: var(--soft); margin-left: auto; }
 @media (max-width: 600px) { .c-hint { display: none; } .c-slide { height: 300px; } }
+
+/* single / paired videos get more presence */
+.vids.solo { grid-template-columns: 1fr; max-width: 1080px; }
+.vids.solo .ytp figcaption, .vids.solo .yt .t { font-size: clamp(1.05rem, 1.6vw, 1.35rem); }
+.vids.solo .yt { border-radius: 18px; box-shadow: 0 30px 80px -30px rgba(0,0,0,.7); }
+.vids.duo { grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); }
+.card .frame img { object-position: var(--pos, 50% 50%); }
+
+/* video riding inside a carousel */
+.c-slide.c-vid .player { height: 100%; }
+.c-slide.c-vid video { height: 100%; width: auto; display: block; }
+
+/* document reader: one landscape page (or a two-page spread) per view */
+.carousel.doc .c-slide { height: auto; width: 100%; background: transparent; }
+.carousel.doc .c-slide img { width: 100%; height: auto; box-shadow: 0 18px 50px -24px rgba(0,0,0,.6); }
+.carousel.doc.portrait .c-slide { width: calc(50% - 6px); }
+@media (max-width: 700px) { .carousel.doc.portrait .c-slide { width: 100%; } .carousel.doc .c-slide { height: auto; } }
+.doc-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+.grid.related .card { grid-column: span 6; }
+@media (max-width: 760px) { .grid.related .card { grid-column: 1 / -1; } }

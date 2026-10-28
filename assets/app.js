@@ -89,7 +89,7 @@
       const c = cover(p);
       const isVid = c && typeof c !== "string";
       return `<a class="card${big ? " big" : ""}${small ? " small" : ""}" href="#work-${p.slug}">
-        <div class="frame${p.coverFit === "contain" ? " contain" : ""}"${p.coverFit === "contain" && typeof c === "string" ? ` style="--cbg:url('${esc(R(c))}')"` : ""}>${c ? media(c, t(p.title), i < 2) : typo(p)}${isVid ? `<span class="badge">Video</span>` : ""}</div>
+        <div class="frame${p.coverFit === "contain" ? " contain" : ""}"${p.coverFit === "contain" && typeof c === "string" ? ` style="--cbg:url('${esc(R(c))}')"` : p.coverPos ? ` style="--pos:${esc(p.coverPos)}"` : ""}>${c ? media(c, t(p.title), i < 2) : typo(p)}${isVid ? `<span class="badge">Video</span>` : ""}</div>
         <div class="meta label"><span>${esc(t(C.categories[p.cat]))}</span><span>${esc(p.year)}</span></div>
         <h3>${esc(t(p.title))}</h3>${small ? "" : `<p>${esc(t(p.summary))}</p>`}</a>`;
   };
@@ -104,7 +104,7 @@
       const c = cover(p);
       const isVid = c && typeof c !== "string";
       return `<a class="card${big ? " big" : ""}" href="#work-${p.slug}">
-        <div class="frame${p.coverFit === "contain" ? " contain" : ""}"${p.coverFit === "contain" && typeof c === "string" ? ` style="--cbg:url('${esc(R(c))}')"` : ""}>${c ? media(c, t(p.title), i < 2) : typo(p)}${isVid ? `<span class="badge">Video</span>` : ""}</div>
+        <div class="frame${p.coverFit === "contain" ? " contain" : ""}"${p.coverFit === "contain" && typeof c === "string" ? ` style="--cbg:url('${esc(R(c))}')"` : p.coverPos ? ` style="--pos:${esc(p.coverPos)}"` : ""}>${c ? media(c, t(p.title), i < 2) : typo(p)}${isVid ? `<span class="badge">Video</span>` : ""}</div>
         <div class="meta label"><span>${esc(t(C.categories[p.cat]))}</span><span>${esc(p.year)}</span></div>
         <h3>${esc(t(p.title))}</h3><p>${esc(t(p.summary))}</p></a>`;
     }).join("");
@@ -159,7 +159,7 @@
     return `<section class="band light" id="about" aria-labelledby="a-h"><div class="wrap">
       <div class="head"><h2 id="a-h">${U("aboutTitle")}</h2><p></p></div>
       <div class="about">
-        <div class="lede"><figure class="me"><img src="${esc(R("assets/img/me/laura.jpg"))}" alt="Laura Magrin" loading="lazy"><figcaption>${U("meCaption")}</figcaption></figure>${t(C.about).map((p) => `<p>${esc(p)}</p>`).join("")}</div>
+        <div class="lede"><figure class="me"><div class="me-ph"><img src="${esc(R("assets/img/me/laura.jpg"))}" alt="Laura Magrin" loading="lazy"></div><figcaption>${U("meCaption")}</figcaption></figure>${t(C.about).map((p) => `<p>${esc(p)}</p>`).join("")}</div>
         <div><h3 class="label" style="margin:0 0 14px;color:var(--accent)">${U("pathTitle")}</h3>
           <ol class="timeline">${C.experience.map((e) => `<li><span class="when">${esc(t(e.dates))}</span><div><h3>${esc(t(e.title))} <span>· ${esc(e.company)}</span></h3><p>${esc(t(e.text))}</p></div></li>`).join("")}</ol></div>
       </div>
@@ -194,8 +194,8 @@
   const footer = () => `<footer class="band"><div class="wrap"><span>© 2026 Laura Magrin</span><span>${U("footer")}</span></div></footer>`;
 
   /* ---------- auto-advancing photo carousel (long galleries) ---------- */
-  const carousel = (imgs, title) => `<div class="carousel" data-carousel>
-      <div class="c-track" tabindex="0" aria-label="${esc(title)} — ${U("galleryHint")}">${imgs.map((s, k) => `<figure class="c-slide"><button class="zoom" type="button" data-lb aria-label="${esc(title)} ${k + 1}">${img(s, `${title} — ${k + 1}`, k < 4)}</button></figure>`).join("")}</div>
+  const carousel = (imgs, title, cls = "", lead = "") => `<div class="carousel${cls ? " " + cls : ""}" data-carousel${/doc/.test(cls) ? " data-noauto" : ""}>
+      <div class="c-track" tabindex="0" aria-label="${esc(title)} — ${U("galleryHint")}">${lead ? `<figure class="c-slide c-vid">${lead}</figure>` : ""}${imgs.map((s, k) => `<figure class="c-slide"><button class="zoom" type="button" data-lb aria-label="${esc(title)} ${k + 1}">${img(s, `${title} — ${k + 1}`, k < 3)}</button></figure>`).join("")}</div>
       <div class="c-ui"><button class="c-btn" type="button" data-cstep="-1" aria-label="${U("prev")}">←</button><span class="c-count label">1 / ${imgs.length}</span><button class="c-btn" type="button" data-cstep="1" aria-label="${U("nextImg")}">→</button><span class="c-hint label">${U("galleryHint")}</span></div></div>`;
   let carTimers = [];
   function initCarousels() {
@@ -211,7 +211,7 @@
       let hold = 0;
       const pause = () => { hold = Date.now() + 7000; };
       ["pointerenter", "pointerdown", "focusin", "touchstart", "wheel"].forEach((ev) => c.addEventListener(ev, pause, { passive: true }));
-      if (!REDUCED) carTimers.push(setInterval(() => {
+      if (!REDUCED && !c.hasAttribute("data-noauto")) carTimers.push(setInterval(() => {
         const r = c.getBoundingClientRect();
         if (Date.now() < hold || document.hidden || r.bottom < 0 || r.top > innerHeight || !document.getElementById("lb").hidden) return;
         c.step(1);
@@ -231,7 +231,7 @@
   function caseView(p) {
     const order = [...C.featured, ...C.more];
     const nxt = P(order[(order.indexOf(p.slug) + 1) % order.length]);
-    const facts = [[U("year"), esc(p.year)], [U("client"), esc(t(p.client))], [U("myRole"), esc(t(p.role))], [U("place"), esc(t(p.place))]];
+    const facts = [[U("year"), esc(p.year)], [U("client"), esc(t(p.client))], [U("myRole"), esc(t(p.role))], [U("place"), esc(t(p.place))]].filter((f) => f[1]);
     if (p.link) facts.push([U("visit"), `<a href="${esc(p.link)}" target="_blank" rel="noopener">${esc(p.link.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""))}</a>`]);
     const imgs = p.images || [];
     const loops = p.loops || [];
@@ -239,11 +239,19 @@
     const gallery = (loops.length || imgs.length)
       ? `<section class="band light"><div class="wrap">
           ${loops.length && !inWall ? `<div class="loops">${loops.map((v) => player(v, t(p.title))).join("")}</div>` : ""}
-          ${imgs.length > 12 ? carousel(imgs, t(p.title)) : imgs.length ? `<div class="wall">${inWall ? `<figure>${player(loops[0], t(p.title))}</figure>` : ""}${imgs.map((s, k) => `<figure><button class="zoom" type="button" data-lb aria-label="${esc(t(p.title))} ${k + 1}">${img(s, `${t(p.title)} — ${k + 1}`, k < 3)}</button></figure>`).join("")}</div>` : ""}
+          ${imgs.length >= 3 ? carousel(imgs, t(p.title), "", inWall ? player(loops[0], t(p.title)) : "") : imgs.length ? `<div class="wall">${inWall ? `<figure>${player(loops[0], t(p.title))}</figure>` : ""}${imgs.map((s, k) => `<figure><button class="zoom" type="button" data-lb aria-label="${esc(t(p.title))} ${k + 1}">${img(s, `${t(p.title)} — ${k + 1}`, k < 3)}</button></figure>`).join("")}</div>` : ""}
         </div></section>`
       : `<section class="band light"><div class="wrap"><div class="wall">${[0, 1, 2].map(() => `<figure>${ph(U("imgSoon"), "static")}</figure>`).join("")}</div></div></section>`;
     const sets = (p.sets || []).map((g, n) => `<section class="band ${n % 2 ? "light" : ""} set-band"><div class="wrap"><div class="head"><h2>${esc(t(g.title))}</h2><p>${esc(t(g.note || ""))}</p></div>
-        <div class="wall">${g.images.map((s, k) => `<figure><button class="zoom" type="button" data-lb aria-label="${esc(t(g.title))} ${k + 1}">${img(s, `${t(g.title)} — ${k + 1}`)}</button></figure>`).join("")}</div></div></section>`).join("");
+        ${g.images.length >= 3 ? carousel(g.images, t(g.title)) : `<div class="wall">${g.images.map((s, k) => `<figure><button class="zoom" type="button" data-lb aria-label="${esc(t(g.title))} ${k + 1}">${img(s, `${t(g.title)} — ${k + 1}`)}</button></figure>`).join("")}</div>`}</div></section>`).join("");
+    /* documents (decks, reports, books): page-by-page reader + the full PDF */
+    const docs = (p.docs || []).map((d, n) => `<section class="band ${n % 2 ? "" : "light"} doc-band" data-lbscope><div class="wrap"><div class="head"><h2>${esc(t(d.title))}</h2><p>${esc(t(d.note || ""))}</p></div>
+        ${carousel(d.pages, t(d.title), "doc" + (d.portrait ? " portrait" : ""))}
+        <div class="doc-actions"><button class="btn solid" type="button" data-docread>${U("docRead")}</button><a class="btn" href="${esc(R(d.pdf))}" target="_blank" rel="noopener">${U("docPdf")}${d.size ? ` · ${esc(d.size)}` : ""}</a></div></div></section>`).join("");
+    /* related project calls */
+    const related = p.related
+      ? `<section class="band related-band"><div class="wrap"><div class="head"><h2>${esc(t(p.related.title))}</h2><p>${esc(t(p.related.note || ""))}</p></div><div class="grid related">${p.related.slugs.map(P).map((q, i) => card(q, i, false, false)).join("")}</div></div></section>`
+      : "";
     const stats = p.stats && p.stats.length
       ? `<section class="band light stats-band"><div class="wrap"><h2 class="label" style="margin:0 0 18px;color:var(--accent)">${U("atAGlance")}</h2><div class="stats">${p.stats.map((x) => `<div><strong>${esc(x.value)}</strong><span>${esc(t(x.label))}</span></div>`).join("")}</div></div></section>`
       : "";
@@ -256,7 +264,7 @@
           <div class="compare">${["before", "after"].map((k) => `<div class="cmp-col cmp-${k}"><h3 class="label">${esc(t(p.compare[k].label))}</h3><div class="cmp-grid">${p.compare[k].images.map((src, n) => zoomImg(src, `${t(p.compare[k].label)} ${n + 1}`)).join("")}</div></div>`).join("")}</div></div></section>`
       : "";
     const videos = p.videos && p.videos.length
-      ? `<section class="band deep"><div class="wrap"><div class="head"><h2>${U("watch")}</h2><p></p></div><div class="vids">${p.videos.map(ytInline).join("")}</div></div></section>`
+      ? `<section class="band deep"><div class="wrap"><div class="head"><h2>${U("watch")}</h2><p></p></div><div class="vids${p.videos.length===1?" solo":p.videos.length===2?" duo":""}">${p.videos.map(ytInline).join("")}</div></div></section>`
       : "";
     return `<section class="band decor case-top"><div class="wrap">
         <button class="back label" data-go="work">← ${U("back")}</button>
@@ -268,7 +276,7 @@
             <h2 class="label" style="margin:26px 0 0;color:var(--soft)">${U("deliverables")}</h2>
             <div class="tags">${t(p.deliverables).map((d) => `<span>${esc(d)}</span>`).join("")}</div>${teamHTML(p)}${p.feature ? `<figure class="feature-fig"><button class="zoom" type="button" data-lb aria-label="${esc(t(p.feature.caption))}">${img(p.feature.src, t(p.feature.caption))}</button><figcaption>${esc(t(p.feature.caption))}</figcaption></figure>` : ""}</div>
         </div></div></section>
-      ${stats}${compare}${videos}${gallery}${sets}${quotes}
+      ${stats}${compare}${videos}${gallery}${related}${docs}${sets}${quotes}
       <section class="band wine cta"><div class="wrap"><h2>${U("caseCta")}</h2><button class="btn solid" data-go="contact">${U("caseCtaBtn")}</button></div></section>
       <section class="band"><div class="wrap" style="padding-block:40px 64px"><a class="next" href="#work-${nxt.slug}"><span><span class="label soft">${U("next")}</span><strong>${esc(t(nxt.title))}</strong></span>${arrow}</a></div></section>`;
   }
@@ -306,7 +314,8 @@
   }
   function lbOpen(btn) {
     lastFocus = document.activeElement;
-    const all = [...document.querySelectorAll(".zoom")];
+    const scope = btn.closest("[data-lbscope]");
+    const all = scope ? [...scope.querySelectorAll(".zoom")] : [...document.querySelectorAll(".zoom:not([data-lbscope] .zoom)")];
     const i = Math.max(0, all.indexOf(btn));
     lbList = all.map((b) => b.querySelector("img")).filter(Boolean).map((x) => ({ src: x.currentSrc || x.src, alt: x.alt }));
     if (!lbList.length) return;
@@ -396,6 +405,8 @@
     if (e.target.closest("[data-lbclose]")) { lbClose(); return; }
     const cs = e.target.closest("[data-cstep]");
     if (cs) { const c = cs.closest("[data-carousel]"); if (c && c.step) c.step(Number(cs.dataset.cstep)); return; }
+    const dr = e.target.closest("[data-docread]");
+    if (dr) { const z = dr.closest("[data-lbscope]").querySelector(".zoom"); if (z) lbOpen(z); return; }
     const st = e.target.closest("[data-lbstep]");
     if (st) { lbShow(lbIdx + Number(st.dataset.lbstep)); return; }
     const z = e.target.closest("[data-lb]");
