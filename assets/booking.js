@@ -9,7 +9,7 @@
       type: "Project type", budget: "Estimated budget (optional)", timeline: "When do you need it?",
       msg: "Tell me about the project", msgPh: "Goals, audience, deliverables, references…",
       types: ["Brand identity", "Event communication", "Campaign", "Landing page or website", "Illustration", "Motion design", "Something else"],
-      budgets: ["Not sure yet", "Up to US$ 200", "US$ 200 – 450", "US$ 450 – 950", "US$ 950 – 1,850", "US$ 1,850 – 4,650", "US$ 4,650 – 9,350", "Over US$ 9,350"],
+      budgets: ["Not sure yet", "Up to US$ 200", "US$ 200 – 500", "US$ 500 – 1,000", "US$ 1,000 – 2,000", "US$ 2,000 – 4,500", "US$ 4,500 – 10,000", "Over US$ 10,000"],
       timelines: ["As soon as possible", "Within a month", "In 1 to 3 months", "Flexible"],
       choose: "Choose", next: "Next: pick a time", back: "Back", book: "Book the call",
       privacy: "Your details are used only to prepare and reply about this meeting.",
