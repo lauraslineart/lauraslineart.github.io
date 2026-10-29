@@ -179,7 +179,13 @@
             <div class="row"><button class="btn" type="button" id="copy-mail">${U("copy")}</button></div>
             <div class="row"><a class="btn" href="${esc(C.linkedin)}" target="_blank" rel="noopener">LinkedIn ${a}</a><a class="btn" href="${esc(R(t(C.cv)))}" target="_blank" rel="noopener">${U("ctaCv")}</a></div>
           </div></div>
-        <form class="mail" id="mail-form" novalidate>
+        <div class="reach">
+        <div class="reach-pick">
+          <button class="pick" type="button" data-reach="mail" aria-pressed="false" aria-controls="mail-form"><span class="pick-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m3.5 6 8.5 7 8.5-7"/></svg></span><strong>${U("pickMail")}</strong><span>${U("pickMailNote")}</span></button>
+          <button class="pick" type="button" data-reach="meet" aria-pressed="false" aria-controls="meet-flow"><span class="pick-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="1.5"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/></svg></span><strong>${U("pickMeet")}</strong><span>${U("pickMeetNote")}</span></button>
+        </div>
+        <div class="meet-flow" id="meet-flow" hidden></div>
+        <form class="mail" id="mail-form" novalidate hidden>
           <div class="two">
             <div class="field"><label class="label" for="f-name">${U("fName")}</label><input id="f-name" name="name" autocomplete="name" required></div>
             <div class="field"><label class="label" for="f-email">${U("fEmail")}</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
@@ -188,7 +194,7 @@
           <div class="field"><label class="label" for="f-message">${U("fMessage")}</label><textarea id="f-message" name="message" required></textarea></div>
           <div class="row"><button class="btn solid" type="submit">${U("fSend")} ${a}</button></div>
           <p class="note">${U("fNote")} <strong>${esc(C.email)}</strong>.</p>
-        </form></div></div></section>`;
+        </form></div></div></div></section>`;
   }
 
   const footer = () => `<footer class="band"><div class="wrap"><span>© 2026 Laura Magrin</span><span>${U("footer")}</span></div></footer>`;
@@ -221,6 +227,8 @@
 
   /* ---------- interactive demos are loaded only when someone opens one ---------- */
   let demosP;
+  const scriptP = {};
+  const loadScript = (g, src) => window[g] ? Promise.resolve() : (scriptP[g] = scriptP[g] || new Promise((ok, ko) => { const sc = document.createElement("script"); sc.src = R(src); sc.onload = ok; sc.onerror = () => { delete scriptP[g]; ko(); }; document.head.appendChild(sc); }));
   const loadDemos = () => window.Demos ? Promise.resolve() : (demosP = demosP || new Promise((ok, ko) => { const sc = document.createElement("script"); sc.src = R("assets/demos.js"); sc.onload = ok; sc.onerror = ko; document.head.appendChild(sc); }));
 
   /* ---------- team credits ---------- */
@@ -418,6 +426,18 @@
     if (e.target.closest("[data-lbclose]")) { lbClose(); return; }
     const cs = e.target.closest("[data-cstep]");
     if (cs) { const c = cs.closest("[data-carousel]"); if (c && c.step) c.step(Number(cs.dataset.cstep)); return; }
+    const rc = e.target.closest("[data-reach]");
+    if (rc) {
+      const which = rc.dataset.reach, form = document.getElementById("mail-form"), flow = document.getElementById("meet-flow");
+      document.querySelectorAll("[data-reach]").forEach((b) => b.setAttribute("aria-pressed", b === rc));
+      form.hidden = which !== "mail"; flow.hidden = which !== "meet";
+      if (which === "mail") { form.querySelector("#f-name").focus({ preventScroll: true }); form.scrollIntoView({ behavior: "smooth", block: "nearest" }); }
+      else if (!flow.dataset.ready) {
+        flow.dataset.ready = "1"; flow.innerHTML = `<p class="note">…</p>`;
+        loadScript("Booking", "assets/booking.js").then(() => window.Booking.mount(flow, lang, PREVIEW ? "" : C.booking, C.email), () => { flow.innerHTML = `<p class="note">${U("fNote")} <strong>${esc(C.email)}</strong>.</p>`; });
+      }
+      return;
+    }
     const dm = e.target.closest("[data-demo]");
     if (dm) { loadDemos().then(() => window.Demos.open(dm.dataset.demo, lang, dm.dataset.dtitle)); return; }
     const dr = e.target.closest("[data-docread]");

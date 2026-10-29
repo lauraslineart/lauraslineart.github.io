@@ -13,6 +13,8 @@ const range = (dir, n, prefix = "") =>
 
 window.CONTENT = {
   email: "lauramagrin@hotmail.com",
+  // Google Apps Script web app (project "Portfolio - Agendamento", personal Google account): free times + booking.
+  booking: "https://script.google.com/macros/s/AKfycbyo1yjNHudrn_J5Tlixt-xkUsuYLmKG3KEB95AuuTr5r26aFcTwi4y_7I4SVODMvY6k8Q/exec",
   linkedin: "https://www.linkedin.com/in/laura-magrin/",
   cv: { en: "cv/Laura-Magrin-Resume-EN.pdf", pt: "cv/Laura-Magrin-Curriculo-PT.pdf" },
 
@@ -74,9 +76,13 @@ window.CONTENT = {
     toolsTitle: { en: "Tools", pt: "Ferramentas" },
     contactTitle: { en: "Let's talk", pt: "Vamos conversar" },
     contactIntro: {
-      en: "Available for freelance projects worldwide: brand identities, event communication, campaigns, landing pages and illustration. Tell me about your project and it opens in your email app, ready to send.",
-      pt: "Disponível para freelas no Brasil e no exterior: identidades visuais, comunicação de eventos, campanhas, landing pages e ilustração. Conte sobre o seu projeto e a mensagem abre no seu app de e-mail, pronta para enviar."
+      en: "Available for freelance projects worldwide: brand identities, event communication, campaigns, landing pages and illustration. Send me an email or book a call straight into my calendar.",
+      pt: "Disponível para freelas no Brasil e no exterior: identidades visuais, comunicação de eventos, campanhas, landing pages e ilustração. Me mande um e-mail ou marque uma reunião direto na minha agenda."
     },
+    pickMail: { en: "Send an email", pt: "Mandar um e-mail" },
+    pickMailNote: { en: "Write about your project and it opens in your email app, ready to send.", pt: "Escreva sobre o projeto e a mensagem abre no seu app de e-mail, pronta para enviar." },
+    pickMeet: { en: "Book a call", pt: "Marcar uma reunião" },
+    pickMeetNote: { en: "A short briefing, then pick a time. 30 minutes on Google Meet.", pt: "Um briefing rápido e você escolhe o horário. 30 minutos pelo Google Meet." },
     fName: { en: "Your name", pt: "Seu nome" },
     fEmail: { en: "Your email", pt: "Seu e-mail" },
     fSubject: { en: "Project type", pt: "Tipo de projeto" },
