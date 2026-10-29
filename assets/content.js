@@ -777,7 +777,7 @@ window.CONTENT = {
         pt: ["Ilustração de personagens", "Mascotes e lightsticks", "Banners frente e verso", "Arte final para impressão", "Entrevista com a banda"]
       },
       videos: [{ yt: "-jbwgi1w-os", title: { en: "My interview with CRTK", pt: "Minha entrevista com o CRTK" } }],
-      images: [...range("kpop", 5, "crtk-"), ...range("kpop", 7, "show-"), ...range("kpop", 6, "uau-")]
+      images: [...range("kpop", 5, "crtk-"), ...range("kpop", 4, "show-"), ...range("kpop", 6, "uau-")]
     },
     {
       slug: "illustrations",
