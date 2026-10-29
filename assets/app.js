@@ -219,6 +219,10 @@
     });
   }
 
+  /* ---------- interactive demos are loaded only when someone opens one ---------- */
+  let demosP;
+  const loadDemos = () => window.Demos ? Promise.resolve() : (demosP = demosP || new Promise((ok, ko) => { const sc = document.createElement("script"); sc.src = R("assets/demos.js"); sc.onload = ok; sc.onerror = ko; document.head.appendChild(sc); }));
+
   /* ---------- team credits ---------- */
   const person = (x) => `<span>${x.me ? U("teamMe") : esc(x.name)}${x.years ? ` <i>${esc(x.years)}</i>` : ""}${x.note ? ` <i>${esc(t(x.note))}</i>` : ""}</span>`;
   function teamHTML(p) {
@@ -236,7 +240,7 @@
     const imgs = p.images || [];
     const loops = p.loops || [];
     const inWall = loops.length === 1 && !loops[0].wide && imgs.length > 2;
-    const gallery = (loops.length || imgs.length)
+    const gallery = (!loops.length && !imgs.length && p.demos) ? "" : (loops.length || imgs.length)
       ? `<section class="band light"><div class="wrap">
           ${loops.length && !inWall ? `<div class="loops">${loops.map((v) => player(v, t(p.title))).join("")}</div>` : ""}
           ${imgs.length >= 3 ? carousel(imgs, t(p.title), "", inWall ? player(loops[0], t(p.title)) : "") : imgs.length ? `<div class="wall">${inWall ? `<figure>${player(loops[0], t(p.title))}</figure>` : ""}${imgs.map((s, k) => `<figure><button class="zoom" type="button" data-lb aria-label="${esc(t(p.title))} ${k + 1}">${img(s, `${t(p.title)} — ${k + 1}`, k < 3)}</button></figure>`).join("")}</div>` : ""}
@@ -248,6 +252,12 @@
     const docs = (p.docs || []).map((d, n) => `<section class="band ${n % 2 ? "" : "light"} doc-band" data-lbscope><div class="wrap"><div class="head"><h2>${esc(t(d.title))}</h2><p>${esc(t(d.note || ""))}</p></div>
         ${carousel(d.pages, t(d.title), "doc" + (d.portrait ? " portrait" : ""))}
         <div class="doc-actions"><button class="btn solid" type="button" data-docread>${U("docRead")}</button><a class="btn" href="${esc(R(d.pdf))}" target="_blank" rel="noopener">${U("docPdf")}${d.size ? ` · ${esc(d.size)}` : ""}</a></div></div></section>`).join("");
+    /* interactive demos (fictional data), opened in a pop-up */
+    const demos = p.demos
+      ? `<section class="band light demo-band"><div class="wrap"><div class="head"><h2>${U("demosTitle")}</h2><p>${U("demosIntro")}</p></div>
+          <div class="demo-cards">${p.demos.map((d) => `<button type="button" class="demo-card" data-demo="${esc(d.id)}" data-dtitle="${esc(t(d.title))}">${d.img ? `<span class="dc-img">${img(d.img, "")}</span>` : ""}<span class="dc-txt"><span class="label">${esc(t(d.kind))}</span><strong>${esc(t(d.title))}</strong><span class="dc-note">${esc(t(d.note))}</span><span class="go">${U("demoOpen")} →</span></span></button>`).join("")}</div>
+          <p class="demo-disclaimer">${U("demosNote")}</p></div></section>`
+      : "";
     /* related project calls */
     const related = p.related
       ? `<section class="band related-band"><div class="wrap"><div class="head"><h2>${esc(t(p.related.title))}</h2><p>${esc(t(p.related.note || ""))}</p></div><div class="grid related">${p.related.slugs.map(P).map((q, i) => card(q, i, false, false)).join("")}</div></div></section>`
@@ -276,8 +286,8 @@
             <h2 class="label" style="margin:26px 0 0;color:var(--soft)">${U("deliverables")}</h2>
             <div class="tags">${t(p.deliverables).map((d) => `<span>${esc(d)}</span>`).join("")}</div>${teamHTML(p)}${p.feature ? `<figure class="feature-fig"><button class="zoom" type="button" data-lb aria-label="${esc(t(p.feature.caption))}">${img(p.feature.src, t(p.feature.caption))}</button><figcaption>${esc(t(p.feature.caption))}</figcaption></figure>` : ""}</div>
         </div></div></section>
-      ${stats}${compare}${videos}${gallery}${related}${docs}${sets}${quotes}
-      <section class="band wine cta"><div class="wrap"><h2>${U("caseCta")}</h2><button class="btn solid" data-go="contact">${U("caseCtaBtn")}</button></div></section>
+      ${stats}${compare}${videos}${gallery}${demos}${related}${docs}${sets}${quotes}
+      <section class="band wine cta"><div class="wrap"><h2>${p.cta ? esc(t(p.cta.title)) : U("caseCta")}</h2><button class="btn solid" data-go="contact">${p.cta ? esc(t(p.cta.btn)) : U("caseCtaBtn")}</button></div></section>
       <section class="band"><div class="wrap" style="padding-block:40px 64px"><a class="next" href="#work-${nxt.slug}"><span><span class="label soft">${U("next")}</span><strong>${esc(t(nxt.title))}</strong></span>${arrow}</a></div></section>`;
   }
 
@@ -405,6 +415,8 @@
     if (e.target.closest("[data-lbclose]")) { lbClose(); return; }
     const cs = e.target.closest("[data-cstep]");
     if (cs) { const c = cs.closest("[data-carousel]"); if (c && c.step) c.step(Number(cs.dataset.cstep)); return; }
+    const dm = e.target.closest("[data-demo]");
+    if (dm) { loadDemos().then(() => window.Demos.open(dm.dataset.demo, lang, dm.dataset.dtitle)); return; }
     const dr = e.target.closest("[data-docread]");
     if (dr) { const z = dr.closest("[data-lbscope]").querySelector(".zoom"); if (z) lbOpen(z); return; }
     const st = e.target.closest("[data-lbstep]");

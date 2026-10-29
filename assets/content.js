@@ -120,6 +120,10 @@ window.CONTENT = {
     next: { en: "Next project", pt: "Próximo projeto" },
     imgSoon: { en: "Images coming soon", pt: "Imagens em breve" },
     docRead: { en: "Read full screen", pt: "Ler em tela cheia" },
+    demosTitle: { en: "Tools I built for the team", pt: "Ferramentas que criei para o time" },
+    demosIntro: { en: "Simplified, clickable versions of the calendar and dashboards the team uses every week. Open one to try it.", pt: "Versões resumidas e clicáveis do calendário e dos dashboards que o time usa toda semana. Abra um para testar." },
+    demoOpen: { en: "Open interactive demo", pt: "Abrir demo interativa" },
+    demosNote: { en: "All numbers, posts and names in these demos are fictional. The real tools run on live data from Google Sheets, RD Station, PostHog and the social platforms.", pt: "Todos os números, posts e nomes destas demos são fictícios. As ferramentas reais rodam com dados ao vivo do Google Sheets, RD Station, PostHog e das redes sociais." },
     docPdf: { en: "Open the PDF", pt: "Abrir o PDF" },
     footer: { en: "Designed and written by Laura Magrin.", pt: "Design e textos por Laura Magrin." }
   },
@@ -310,7 +314,7 @@ window.CONTENT = {
         before: { label: { en: "Before · 2018–2019 identity", pt: "Antes · identidade de 2018–2019" }, images: [IMG("summit/19-01.jpg"), IMG("summit/18-01.jpg"), IMG("summit/19-02.jpg"), IMG("summit/18-02.jpg")] },
         after: { label: { en: "After · 2022 rebrand, still the base today", pt: "Depois · rebranding de 2022, base até hoje" }, images: [IMG("summit/22-01.jpg"), IMG("summit/26-01.jpg"), IMG("summit/25-01.jpg"), IMG("summit/24-01.jpg")] }
       },
-      images: [...range("summit", 9, "26-"), ...range("summit", 10, "25-"), IMG("system/15.jpg"), ...range("summit", 8, "24-"), IMG("summit/23-02.jpg"), IMG("summit/23-03.jpg"), IMG("summit/23-04.jpg"), IMG("summit/23-05.jpg"), IMG("summit/23-06.jpg"), IMG("summit/23-07.jpg"), ...range("summit", 5, "22-")],
+      images: [...range("summit", 9, "26-"), ...range("summit", 10, "25-"), IMG("system/15.jpg"), ...range("summit", 10, "24-"), IMG("summit/23-02.jpg"), IMG("summit/23-03.jpg"), IMG("summit/23-04.jpg"), IMG("summit/23-05.jpg"), IMG("summit/23-06.jpg"), IMG("summit/23-07.jpg"), ...range("summit", 5, "22-")],
       sets: [
         { title: { en: "Identity system · 2025–2026", pt: "Sistema de identidade · 2025–2026" },
           note: { en: "How the identity lands on site in the two latest editions: welcome backdrops, badges by attendee type, totems along the venue, sponsor screens and the 2025 stage and backdrop.", pt: "Como a identidade aparece no evento nas duas últimas edições: backdrops de boas-vindas, crachás por tipo de participante, totens pelo espaço, telas de patrocinadores e o palco e o backdrop de 2025." },
@@ -378,6 +382,11 @@ window.CONTENT = {
       place: { en: "Greener HQ · São Paulo", pt: "Sede Greener · São Paulo" },
       link: "https://greener.com.br/imersao-bess-cni",
       cover: IMG("imersao/p01.jpg"),
+      stats: [
+        { value: "2", label: { en: "editions in 2026: LRCAP Batteries and BESS C&I Financial Modelling", pt: "edições em 2026: LRCAP Baterias e Modelagem Financeira BESS C&I" } },
+        { value: "~6", label: { en: "participants per class, an intentionally exclusive format", pt: "participantes por turma, formato propositalmente exclusivo" } },
+        { value: "2", label: { en: "days of in-person immersion per edition", pt: "dias de imersão presencial por edição" } }
+      ],
       summary: {
         en: "Greener's newest event and its main bet for 2027: two-day, deliberately small and exclusive immersions on battery storage. LRCAP Batteries ran in September and BESS C&I Financial Modelling in October 2026.",
         pt: "O evento mais novo da Greener e sua grande aposta para 2027: imersões presenciais de dois dias, em turmas propositalmente reduzidas e exclusivas, sobre armazenamento em baterias. LRCAP Baterias aconteceu em setembro e Modelagem Financeira BESS C&I em outubro de 2026."
@@ -447,17 +456,22 @@ window.CONTENT = {
       role: { en: "Brand & marketing lead", pt: "Líder de marca e marketing" },
       place: "São Paulo",
       cover: IMG("igd/01.jpg"),
+      stats: [
+        { value: "5,000+", label: { en: "views of the two live broadcasts on YouTube", pt: "visualizações das duas transmissões ao vivo no YouTube" } },
+        { value: "3,255", label: { en: "views of the 2023 broadcast, which launched the GD strategic study", pt: "visualizações da transmissão de 2023, que lançou o estudo estratégico de GD" } },
+        { value: "1,811", label: { en: "views of the 5.5-hour hybrid broadcast in 2024", pt: "visualizações da transmissão híbrida de 5h30 em 2024" } }
+      ],
       summary: {
         en: "Greener's event for distributed-generation integrators. I led its brand and gave live support on site.",
         pt: "O evento da Greener para integradores de geração distribuída. Liderei a marca e dei suporte em tempo real no local."
       },
       body: {
         en: [
-          "Imersão GD brought distributed-generation professionals, mainly integrators, together to discuss sales, financing, regulation, prices and new businesses such as batteries and EVs. The 2024 edition took place on August 26 at AMCHAM São Paulo, in person and online.",
+          "Imersão GD brought distributed-generation professionals, mainly integrators, together to discuss sales, financing, regulation, prices and new businesses such as batteries and EVs. The 2023 edition, on September 20, launched Greener's GD strategic study for the first half of 2023 with a live broadcast. The 2024 edition took place on August 26 at AMCHAM São Paulo, in person and online.",
           "I led the event's branding, the promotion carousels and campaigns, and worked on site with real-time support for screens and content during the day."
         ],
         pt: [
-          "A Imersão GD reuniu profissionais de geração distribuída, principalmente integradores, para debater vendas, financiamento, regulação, preços e novos negócios como baterias e veículos elétricos. A edição de 2024 aconteceu em 26 de agosto, na AMCHAM São Paulo, em formato presencial e online.",
+          "A Imersão GD reuniu profissionais de geração distribuída, principalmente integradores, para debater vendas, financiamento, regulação, preços e novos negócios como baterias e veículos elétricos. A edição de 2023, em 20 de setembro, lançou o Estudo Estratégico de GD do 1º semestre de 2023 com transmissão ao vivo. A de 2024 aconteceu em 26 de agosto, na AMCHAM São Paulo, em formato presencial e online.",
           "Liderei o branding do evento, os carrosséis e as campanhas de divulgação, e atuei no local com suporte em tempo real para telas e conteúdo durante o dia."
         ]
       },
@@ -470,8 +484,7 @@ window.CONTENT = {
       ],
       images: [
         ...range("igd", 5),
-        "https://lauraslineart.weebly.com/uploads/1/4/5/8/145887954/20230920-183528610-ios-1_orig.jpg",
-        "https://lauraslineart.weebly.com/uploads/1/4/5/8/145887954/editor/20230920-165448280-ios.jpg",
+        ...range("igd", 8, "23-"),
         IMG("igd/06.jpg"),
         IMG("igd/07.jpg")
       ]
@@ -487,6 +500,9 @@ window.CONTENT = {
       role: { en: "Marketing & Design lead", pt: "Líder de Marketing e Design" },
       place: "Praça São Lourenço · São Paulo",
       cover: VID("storage-launch"),
+      stats: [
+        { value: "1,500", label: { en: "downloads of the study's free sample edition", pt: "downloads da versão amostra do estudo" } }
+      ],
       summary: {
         en: "Launch event for Greener's first strategic study on energy storage, bringing together specialists, companies and investors.",
         pt: "Evento de lançamento do primeiro estudo estratégico da Greener sobre armazenamento de energia, reunindo especialistas, empresas e investidores."
@@ -598,6 +614,11 @@ window.CONTENT = {
         pt: ["Gestão do projeto", "Direção visual", "Layouts", "Front-end via vibe coding", "Landing pages", "Vibe coding", "Protótipo de web app (2027)", "Formulários e integração com RD Station"]
       },
       cover: IMG("covers/website.jpg"),
+      stats: [
+        { value: "140K+", label: { en: "page views since the July 2025 launch (PostHog)", pt: "visualizações de página desde o lançamento, em julho de 2025 (PostHog)" } },
+        { value: "62K+", label: { en: "unique visitors since launch", pt: "visitantes únicos desde o lançamento" } },
+        { value: "2.3×", label: { en: "monthly visitors, Sep 2026 vs Sep 2025", pt: "visitantes no mês, set/2026 vs set/2025" } }
+      ],
       images: [IMG("web/01.jpg"), IMG("web/02.jpg"), IMG("web/03.jpg"), IMG("web/tall-02.jpg"), IMG("web/04.jpg"), IMG("web/05.jpg"), IMG("web/06.jpg"), IMG("web/07.jpg")]
     },
     {
@@ -641,6 +662,8 @@ window.CONTENT = {
       client: "Greener",
       role: { en: "Head of Marketing & Design", pt: "Head de Marketing e Design" },
       place: { en: "In-house", pt: "Interno" },
+      cover: IMG("ops/calendar.jpg"),
+      coverPos: "0% 0%",
       summary: {
         en: "The work behind the campaigns: team management, the communication calendar, performance tracking, sponsor reports and the restructuring of the lead base.",
         pt: "O trabalho por trás das campanhas: gestão do time, calendário de comunicação, acompanhamento de resultados, relatórios para patrocinadores e a reestruturação da base de leads."
@@ -661,7 +684,27 @@ window.CONTENT = {
         en: ["Team management", "Communication calendar", "Performance tracking", "Sponsor reports", "Lead profiling & personas", "RD Station forms"],
         pt: ["Gestão de equipe", "Calendário de comunicação", "Acompanhamento de resultados", "Relatórios para patrocinadores", "Perfilamento de leads e personas", "Formulários RD Station"]
       },
-      images: []
+      images: [],
+      demos: [
+        { id: "calendar", img: IMG("ops/calendar.jpg"), kind: { en: "Planning", pt: "Planejamento" }, title: { en: "Editorial calendar", pt: "Calendário editorial" },
+          note: { en: "Week-by-week grid across email, LinkedIn, Instagram and WhatsApp, a cadence dashboard and the team's action plan.", pt: "Grade semana a semana entre e-mail, LinkedIn, Instagram e WhatsApp, um dashboard de cadência e o plano de ação do time." } },
+        { id: "instagram", img: IMG("ops/instagram.jpg"), kind: { en: "Dashboard", pt: "Dashboard" }, title: { en: "Instagram report", pt: "Relatório de Instagram" },
+          note: { en: "Week vs previous week, views and interaction rate per week, and the days and times that perform best.", pt: "Semana contra a anterior, views e taxa de interação por semana, e os dias e horários que mais rendem." } },
+        { id: "linkedin", img: IMG("ops/linkedin.jpg"), kind: { en: "Dashboard", pt: "Dashboard" }, title: { en: "LinkedIn report", pt: "Relatório de LinkedIn" },
+          note: { en: "Best time per weekday, relative reach by slot, formats and the top posts.", pt: "Melhor horário por dia, alcance relativo por faixa, formatos e os melhores posts." } },
+        { id: "youtube", img: IMG("ops/youtube.jpg"), kind: { en: "Dashboard", pt: "Dashboard" }, title: { en: "Live streams report", pt: "Relatório de lives" },
+          note: { en: "Performance per live coloured by theme, averages by theme and a sortable list of every broadcast.", pt: "Desempenho por live colorido por tema, médias por tema e a lista ordenável de todas as transmissões." } },
+        { id: "articles", img: IMG("ops/articles.jpg"), kind: { en: "Dashboard", pt: "Dashboard" }, title: { en: "Articles report", pt: "Relatório de artigos" },
+          note: { en: "Real reading vs automated traffic, performance per article and where readers come from.", pt: "Leitura real contra tráfego automatizado, desempenho por artigo e de onde vêm os leitores." } }
+      ],
+      docs: [
+        { title: { en: "Sponsor report 2026", pt: "Relatório de patrocínio 2026" },
+          note: { en: "The Greener Summit post-event overview I put together for sponsors: audience, reach, results and brand exposure on site.", pt: "O overview pós-evento do Greener Summit que monto para os patrocinadores: público, alcance, resultados e exposição de marca no evento." },
+          pdf: "docs/Greener-Summit-2026-Overview.pdf", size: "5.5 MB", pages: pages("summit26", 42) },
+        { title: { en: "Sponsor report 2025", pt: "Relatório de patrocínio 2025" },
+          note: { en: "The public overview of Greener Summit 2025.", pt: "O overview público do Greener Summit 2025." },
+          pdf: "docs/Greener-Summit-2025-Overview.pdf", size: "2.6 MB", pages: pages("summit25", 26) }
+      ]
     },
     {
       slug: "greener-brand",
@@ -753,18 +796,21 @@ window.CONTENT = {
       body: {
         en: [
           "Alongside design and marketing, I keep a personal illustration practice: digital portraits and characters, exploring light, colour and expression.",
-          "The selection goes from finished paintings to the line sketches where each piece starts. The same hand is behind the K-pop fan banners and the Florescer guidebook below."
+          "Everything is drawn in Procreate. The selection goes from finished paintings to the line sketches where each piece starts. The same hand is behind the K-pop fan banners and the Florescer guidebook below.",
+          "I take commissions and I'm open to discussing illustration projects: portraits, characters, covers and editorial pieces."
         ],
         pt: [
           "Paralelamente ao design e ao marketing, mantenho uma prática autoral de ilustração: retratos e personagens digitais, explorando luz, cor e expressão.",
-          "A seleção vai das pinturas finalizadas aos sketches de linha onde cada peça começa. É a mesma mão por trás dos banners de fãs de K-pop e do livro-guia Florescer, logo abaixo."
+          "Tudo é desenhado no Procreate. A seleção vai das pinturas finalizadas aos sketches de linha onde cada peça começa. É a mesma mão por trás dos banners de fãs de K-pop e do livro-guia Florescer, logo abaixo.",
+          "Aceito encomendas e estou aberta a conversar sobre projetos de ilustração: retratos, personagens, capas e peças editoriais."
         ]
       },
       deliverables: {
-        en: ["Digital painting", "Portraits", "Character design", "Sketches"],
-        pt: ["Pintura digital", "Retratos", "Design de personagens", "Sketches"]
+        en: ["Digital painting (Procreate)", "Portraits", "Character design", "Sketches", "Commissions"],
+        pt: ["Pintura digital (Procreate)", "Retratos", "Design de personagens", "Sketches", "Encomendas"]
       },
       images: range("illus", 10),
+      cta: { title: { en: "Commissions are open", pt: "Encomendas abertas" }, btn: { en: "Talk about a commission", pt: "Conversar sobre uma encomenda" } },
       related: {
         title: { en: "Illustration projects", pt: "Projetos de ilustração" },
         note: { en: "Where illustration became a project of its own.", pt: "Onde a ilustração virou um projeto completo." },
