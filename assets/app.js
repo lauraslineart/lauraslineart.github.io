@@ -240,18 +240,21 @@
     const imgs = p.images || [];
     const loops = p.loops || [];
     const inWall = loops.length === 1 && !loops[0].wide && imgs.length > 2;
-    const gallery = (!loops.length && !imgs.length && p.demos) ? "" : (loops.length || imgs.length)
+    const gallery = (!loops.length && !imgs.length && (p.demos || p.sets)) ? "" : (loops.length || imgs.length)
       ? `<section class="band light"><div class="wrap">
           ${loops.length && !inWall ? `<div class="loops">${loops.map((v) => player(v, t(p.title))).join("")}</div>` : ""}
           ${imgs.length >= 3 ? carousel(imgs, t(p.title), "", inWall ? player(loops[0], t(p.title)) : "") : imgs.length ? `<div class="wall">${inWall ? `<figure>${player(loops[0], t(p.title))}</figure>` : ""}${imgs.map((s, k) => `<figure><button class="zoom" type="button" data-lb aria-label="${esc(t(p.title))} ${k + 1}">${img(s, `${t(p.title)} — ${k + 1}`, k < 3)}</button></figure>`).join("")}</div>` : ""}
         </div></section>`
       : `<section class="band light"><div class="wrap"><div class="wall">${[0, 1, 2].map(() => `<figure>${ph(U("imgSoon"), "static")}</figure>`).join("")}</div></div></section>`;
     const sets = (p.sets || []).map((g, n) => `<section class="band ${n % 2 ? "light" : ""} set-band"><div class="wrap"><div class="head"><h2>${esc(t(g.title))}</h2><p>${esc(t(g.note || ""))}</p></div>
-        ${g.images.length >= 3 ? carousel(g.images, t(g.title)) : `<div class="wall">${g.images.map((s, k) => `<figure><button class="zoom" type="button" data-lb aria-label="${esc(t(g.title))} ${k + 1}">${img(s, `${t(g.title)} — ${k + 1}`)}</button></figure>`).join("")}</div>`}</div></section>`).join("");
+        ${g.loops && g.loops.length ? `<div class="loops">${g.loops.map((v) => player(v, t(g.title))).join("")}</div>` : ""}${g.images.length >= 3 ? carousel(g.images, t(g.title)) : `<div class="wall">${g.images.map((s, k) => `<figure><button class="zoom" type="button" data-lb aria-label="${esc(t(g.title))} ${k + 1}">${img(s, `${t(g.title)} — ${k + 1}`)}</button></figure>`).join("")}</div>`}</div></section>${g.doc != null ? "@@DOC" + g.doc + "@@" : ""}`).join("");
     /* documents (decks, reports, books): page-by-page reader + the full PDF */
-    const docs = (p.docs || []).map((d, n) => `<section class="band ${n % 2 ? "" : "light"} doc-band" data-lbscope><div class="wrap"><div class="head"><h2>${esc(t(d.title))}</h2><p>${esc(t(d.note || ""))}</p></div>
+    const docBand = (d, n) => `<section class="band ${n % 2 ? "" : "light"} doc-band" data-lbscope><div class="wrap"><div class="head"><h2>${esc(t(d.title))}</h2><p>${esc(t(d.note || ""))}</p></div>
         ${carousel(d.pages, t(d.title), "doc" + (d.portrait ? " portrait" : ""))}
-        <div class="doc-actions"><button class="btn solid" type="button" data-docread>${U("docRead")}</button><a class="btn" href="${esc(R(d.pdf))}" target="_blank" rel="noopener">${U("docPdf")}${d.size ? ` · ${esc(d.size)}` : ""}</a></div></div></section>`).join("");
+        <div class="doc-actions"><button class="btn solid" type="button" data-docread>${U("docRead")}</button><a class="btn" href="${esc(R(d.pdf))}" target="_blank" rel="noopener">${U("docPdf")}${d.size ? ` · ${esc(d.size)}` : ""}</a></div></div></section>`;
+    const inSet = new Set((p.sets || []).filter((g) => g.doc != null).map((g) => g.doc));
+    const docs = (p.docs || []).map((d, n) => inSet.has(n) ? "" : docBand(d, n)).join("");
+    const setsOut = sets.replace(/@@DOC(\d+)@@/g, (_, k) => docBand(p.docs[+k], +k));
     /* interactive demos (fictional data), opened in a pop-up */
     const demos = p.demos
       ? `<section class="band light demo-band"><div class="wrap"><div class="head"><h2>${U("demosTitle")}</h2><p>${U("demosIntro")}</p></div>
@@ -286,7 +289,7 @@
             <h2 class="label" style="margin:26px 0 0;color:var(--soft)">${U("deliverables")}</h2>
             <div class="tags">${t(p.deliverables).map((d) => `<span>${esc(d)}</span>`).join("")}</div>${teamHTML(p)}${p.feature ? `<figure class="feature-fig"><button class="zoom" type="button" data-lb aria-label="${esc(t(p.feature.caption))}">${img(p.feature.src, t(p.feature.caption))}</button><figcaption>${esc(t(p.feature.caption))}</figcaption></figure>` : ""}</div>
         </div></div></section>
-      ${stats}${compare}${videos}${gallery}${demos}${related}${docs}${sets}${quotes}
+      ${stats}${compare}${videos}${gallery}${demos}${related}${docs}${setsOut}${quotes}
       <section class="band wine cta"><div class="wrap"><h2>${p.cta ? esc(t(p.cta.title)) : U("caseCta")}</h2><button class="btn solid" data-go="contact">${p.cta ? esc(t(p.cta.btn)) : U("caseCtaBtn")}</button></div></section>
       <section class="band"><div class="wrap" style="padding-block:40px 64px"><a class="next" href="#work-${nxt.slug}"><span><span class="label soft">${U("next")}</span><strong>${esc(t(nxt.title))}</strong></span>${arrow}</a></div></section>`;
   }

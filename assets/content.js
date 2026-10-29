@@ -247,7 +247,8 @@ window.CONTENT = {
     events: { en: "Events", pt: "Eventos" },
     brand: { en: "Brand & Growth", pt: "Marca e Growth" },
     editorial: { en: "Editorial & Web", pt: "Editorial e Web" },
-    illustration: { en: "Illustration & Motion", pt: "Ilustração e Motion" }
+    illustration: { en: "Illustration", pt: "Ilustração" },
+    motion: { en: "Design & Motion", pt: "Design e Motion" }
   },
 
   projects: [
@@ -862,34 +863,47 @@ window.CONTENT = {
     },
     {
       slug: "early-work",
-      cat: "illustration",
-      title: { en: "Dózy & STALO", pt: "Dózy e STALO" },
-      kicker: { en: "Where it started: motion for music and products", pt: "Onde tudo começou: motion para música e produtos" },
+      cat: "motion",
+      title: { en: "STALO & Dózy", pt: "STALO e Dózy" },
+      kicker: { en: "Where it started: product design and motion for brands and music", pt: "Onde tudo começou: design de produto e motion para marcas e música" },
       year: "2020 — 2021",
-      client: "Dózy · STALO",
+      client: "STALO · Dózy",
       role: { en: "Design intern · motion designer", pt: "Estagiária de design · motion designer" },
       place: "Bauru · São Paulo",
-      cover: VID("dozy-01"),
+      cover: VID("stalo-vinheta"),
       summary: {
-        en: "Release teasers, show calls and album art for Dózy Music artists, and the logo vignette and catalogs for STALO.",
-        pt: "Teasers de lançamento, chamadas de shows e capas para artistas da Dózy Music, e a vinheta de logo e os catálogos da STALO."
+        en: "The logo vignette, catalogs, product art and social campaigns for STALO, and release teasers, show calls and album art for Dózy Music artists.",
+        pt: "A vinheta do logo, catálogos, artes de produto e campanhas de redes para a STALO, e teasers de lançamento, chamadas de shows e capas para artistas da Dózy Music."
       },
       body: {
         en: [
-          "At Dózy, an agency focused on music, my highlight was motion design for Dózy Music artists: release teasers, show calls and promotional campaigns that translated each artist's sound into visuals for social media. I also created album covers, merchandise and visual identities.",
-          "At STALO, a manufacturer of boards and office products, I produced catalogs, promotional pieces and product redesigns, and animated the brand's logo vignette."
+          "At STALO, a manufacturer of whiteboards, clipboards and office products, I animated the brand's logo vignette and the product launch videos, designed the product catalog and its page system, created product art such as whiteboard planners, and ran the social media campaigns, from launches to seasonal posts, plus pieces like the sales team's award and uniforms.",
+          "At Dózy, an agency focused on music, my highlight was motion design for Dózy Music artists: release teasers, show calls and promotional campaigns that translated each artist's sound into visuals for social media. I also created album covers, merchandise and visual identities."
         ],
         pt: [
-          "Na Dózy, agência com foco no universo musical, meu destaque foi o motion design para artistas da Dózy Music: teasers de lançamento, chamadas de shows e campanhas promocionais que traduziam o som de cada artista em visuais para as redes. Também criei capas de álbum, produtos e identidades visuais.",
-          "Na STALO, fabricante de quadros e produtos para escritório, produzi catálogos, peças promocionais e redesigns de produtos, e animei a vinheta do logo da marca."
+          "Na STALO, fabricante de quadros, pranchetas e produtos para escritório, animei a vinheta do logo e os vídeos de lançamento de produtos, desenhei o catálogo e seu sistema de páginas, criei artes de produto como os quadros planner e conduzi as campanhas de redes sociais, de lançamentos a datas sazonais, além de peças como o prêmio e os uniformes do time de vendas.",
+          "Na Dózy, agência com foco no universo musical, meu destaque foi o motion design para artistas da Dózy Music: teasers de lançamento, chamadas de shows e campanhas promocionais que traduziam o som de cada artista em visuais para as redes. Também criei capas de álbum, produtos e identidades visuais."
         ]
       },
       deliverables: {
-        en: ["Motion design", "Social media", "Album covers", "Merchandise", "Logo vignette", "Catalogs"],
-        pt: ["Motion design", "Redes sociais", "Capas de álbum", "Produtos", "Vinheta de logo", "Catálogos"]
+        en: ["Logo vignette", "Product motion", "Catalogs", "Product art", "Social media", "Album covers", "Merchandise"],
+        pt: ["Vinheta de logo", "Motion de produto", "Catálogos", "Artes de produto", "Redes sociais", "Capas de álbum", "Produtos"]
       },
-      loops: [VID("dozy-01"), VID("dozy-02"), VID("dozy-03"), VID("dozy-04"), VID("dozy-05"), VID("dozy-06"), VID("stalo-vinheta")],
-      images: range("dozy", 6)
+      sets: [
+        { title: { en: "STALO · 2020–2021", pt: "STALO · 2020–2021" },
+          note: { en: "Logo vignette and product launch videos, the catalog system, whiteboard planners, social campaigns and sales-team pieces.", pt: "Vinheta do logo e vídeos de lançamento de produtos, o sistema do catálogo, quadros planner, campanhas de redes e peças para o time de vendas." },
+          loops: [{ ...VID("stalo-vinheta"), wide: true }, VID("stalo-prancheta"), VID("stalo-planner"), VID("stalo-elegance"), VID("stalo-personalizados"), VID("stalo-linhas")],
+          images: range("stalo", 22), doc: 0 },
+        { title: { en: "Dózy · 2020", pt: "Dózy · 2020" },
+          note: { en: "Motion for Dózy Music artists: release teasers, show calls and album art.", pt: "Motion para artistas da Dózy Music: teasers de lançamento, chamadas de shows e capas." },
+          loops: [VID("dozy-01"), VID("dozy-02"), VID("dozy-03"), VID("dozy-04"), VID("dozy-05"), VID("dozy-06")],
+          images: range("dozy", 6) }
+      ],
+      docs: [
+        { title: { en: "STALO whiteboard catalog", pt: "Catálogo de quadros STALO" },
+          note: { en: "The 2021 whiteboard catalog I laid out, page by page.", pt: "O catálogo de quadros de 2021 que diagramei, página a página." },
+          pdf: "docs/STALO-Catalogo-Quadros-2021.pdf", size: "6.9 MB", portrait: true, pages: pages("stalo", 22) }
+      ]
     }
 
   ],
