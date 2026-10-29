@@ -607,3 +607,4 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
 .set-band .vids.solo { margin-bottom: 18px; }
 .wall.pair { columns: 2 280px; }
+.set-link { margin: -6px 0 18px; }
