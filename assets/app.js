@@ -23,7 +23,7 @@
   const vid = (v, label) => `<video src="${esc(R(v.src))}" poster="${esc(R(v.poster))}" muted loop playsinline preload="metadata" ${REDUCED ? "" : "autoplay"} aria-label="${esc(label)}"></video>`;
   /* Case-page player: autoplays muted, native controls, plus a clear "sound on" button */
   const player = (v, label) => `<div class="player${v.wide ? " wide" : ""}"><video src="${esc(R(v.src))}" poster="${esc(R(v.poster))}" muted loop playsinline controls preload="metadata" ${REDUCED ? "" : "autoplay"} aria-label="${esc(label)}"></video>
-      <button class="sound" type="button" data-sound>${speaker}<span>${U("soundOn")}</span></button></div>`;
+      ${v.silent ? "" : `<button class="sound" type="button" data-sound>${speaker}<span>${U("soundOn")}</span></button>`}</div>`;
   const media = (m, alt, eager) => (!m ? ph() : typeof m === "string" ? img(m, alt, eager) : vid(m, alt));
   const ytThumb = (id) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
   const ytUrl = (id) => `https://www.youtube.com/watch?v=${id}`;
@@ -247,7 +247,7 @@
         </div></section>`
       : `<section class="band light"><div class="wrap"><div class="wall">${[0, 1, 2].map(() => `<figure>${ph(U("imgSoon"), "static")}</figure>`).join("")}</div></div></section>`;
     const sets = (p.sets || []).map((g, n) => `<section class="band ${n % 2 ? "light" : ""} set-band"><div class="wrap"><div class="head"><h2>${esc(t(g.title))}</h2><p>${esc(t(g.note || ""))}</p></div>
-        ${(() => { const lead = g.loops && g.loops.length === 1 && !g.loops[0].wide && g.images.length >= 3; return (g.loops && g.loops.length && !lead ? `<div class="loops">${g.loops.map((v) => player(v, t(g.title))).join("")}</div>` : "") + (g.images.length >= 3 ? carousel(g.images, t(g.title), "", lead ? player(g.loops[0], t(g.title)) : "") : `<div class="wall">${g.images.map((s, k) => `<figure><button class="zoom" type="button" data-lb aria-label="${esc(t(g.title))} ${k + 1}">${img(s, `${t(g.title)} — ${k + 1}`)}</button></figure>`).join("")}</div>`); })()}</div></section>${g.doc != null ? "@@DOC" + g.doc + "@@" : ""}`).join("");
+        ${(() => { const lead = g.loops && g.loops.length === 1 && !g.loops[0].wide && g.images.length >= 3; return (g.yt ? `<div class="vids solo">${ytInline({ yt: g.yt, title: g.ytTitle || g.title })}</div>` : "") + (g.loops && g.loops.length && !lead ? `<div class="loops">${g.loops.map((v) => player(v, t(g.title))).join("")}</div>` : "") + (g.images.length >= 3 ? carousel(g.images, t(g.title), "", lead ? player(g.loops[0], t(g.title)) : "") : g.images.length ? `<div class="wall${g.images.length === 2 ? " pair" : ""}">${g.images.map((s, k) => `<figure><button class="zoom" type="button" data-lb aria-label="${esc(t(g.title))} ${k + 1}">${img(s, `${t(g.title)} — ${k + 1}`)}</button></figure>`).join("")}</div>` : ""); })()}</div></section>${g.doc != null ? "@@DOC" + g.doc + "@@" : ""}`).join("");
     /* documents (decks, reports, books): page-by-page reader + the full PDF */
     const docBand = (d, n) => `<section class="band ${n % 2 ? "" : "light"} doc-band" data-lbscope><div class="wrap"><div class="head"><h2>${esc(t(d.title))}</h2><p>${esc(t(d.note || ""))}</p></div>
         ${carousel(d.pages, t(d.title), "doc" + (d.portrait ? " portrait" : ""))}

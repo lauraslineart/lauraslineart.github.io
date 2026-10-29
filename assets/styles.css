@@ -604,3 +604,6 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   .cal-day { min-height: 0; } .cal-day:not(:has(.d-chip)) { display: none; }
   .demo { padding: 0; } .demo-box { max-height: 100vh; height: 100%; border-radius: 0; }
 }
+
+.set-band .vids.solo { margin-bottom: 18px; }
+.wall.pair { columns: 2 280px; }
