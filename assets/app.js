@@ -196,7 +196,7 @@
   /* ---------- auto-advancing photo carousel (long galleries) ---------- */
   const carousel = (imgs, title, cls = "", lead = "") => `<div class="carousel${cls ? " " + cls : ""}" data-carousel${/doc/.test(cls) ? " data-noauto" : ""}>
       <div class="c-track" tabindex="0" aria-label="${esc(title)} — ${U("galleryHint")}">${lead ? `<figure class="c-slide c-vid">${lead}</figure>` : ""}${imgs.map((s, k) => `<figure class="c-slide"><button class="zoom" type="button" data-lb aria-label="${esc(title)} ${k + 1}">${img(s, `${title} — ${k + 1}`, k < 3)}</button></figure>`).join("")}</div>
-      <div class="c-ui"><button class="c-btn" type="button" data-cstep="-1" aria-label="${U("prev")}">←</button><span class="c-count label">1 / ${imgs.length}</span><button class="c-btn" type="button" data-cstep="1" aria-label="${U("nextImg")}">→</button><span class="c-hint label">${U("galleryHint")}</span></div></div>`;
+      <div class="c-ui"><button class="c-btn" type="button" data-cstep="-1" aria-label="${U("prev")}">←</button><span class="c-count label">1 / ${imgs.length + (lead ? 1 : 0)}</span><button class="c-btn" type="button" data-cstep="1" aria-label="${U("nextImg")}">→</button><span class="c-hint label">${U("galleryHint")}</span></div></div>`;
   let carTimers = [];
   function initCarousels() {
     carTimers.forEach(clearInterval); carTimers = [];
@@ -247,7 +247,7 @@
         </div></section>`
       : `<section class="band light"><div class="wrap"><div class="wall">${[0, 1, 2].map(() => `<figure>${ph(U("imgSoon"), "static")}</figure>`).join("")}</div></div></section>`;
     const sets = (p.sets || []).map((g, n) => `<section class="band ${n % 2 ? "light" : ""} set-band"><div class="wrap"><div class="head"><h2>${esc(t(g.title))}</h2><p>${esc(t(g.note || ""))}</p></div>
-        ${g.loops && g.loops.length ? `<div class="loops">${g.loops.map((v) => player(v, t(g.title))).join("")}</div>` : ""}${g.images.length >= 3 ? carousel(g.images, t(g.title)) : `<div class="wall">${g.images.map((s, k) => `<figure><button class="zoom" type="button" data-lb aria-label="${esc(t(g.title))} ${k + 1}">${img(s, `${t(g.title)} — ${k + 1}`)}</button></figure>`).join("")}</div>`}</div></section>${g.doc != null ? "@@DOC" + g.doc + "@@" : ""}`).join("");
+        ${(() => { const lead = g.loops && g.loops.length === 1 && !g.loops[0].wide && g.images.length >= 3; return (g.loops && g.loops.length && !lead ? `<div class="loops">${g.loops.map((v) => player(v, t(g.title))).join("")}</div>` : "") + (g.images.length >= 3 ? carousel(g.images, t(g.title), "", lead ? player(g.loops[0], t(g.title)) : "") : `<div class="wall">${g.images.map((s, k) => `<figure><button class="zoom" type="button" data-lb aria-label="${esc(t(g.title))} ${k + 1}">${img(s, `${t(g.title)} — ${k + 1}`)}</button></figure>`).join("")}</div>`); })()}</div></section>${g.doc != null ? "@@DOC" + g.doc + "@@" : ""}`).join("");
     /* documents (decks, reports, books): page-by-page reader + the full PDF */
     const docBand = (d, n) => `<section class="band ${n % 2 ? "" : "light"} doc-band" data-lbscope><div class="wrap"><div class="head"><h2>${esc(t(d.title))}</h2><p>${esc(t(d.note || ""))}</p></div>
         ${carousel(d.pages, t(d.title), "doc" + (d.portrait ? " portrait" : ""))}

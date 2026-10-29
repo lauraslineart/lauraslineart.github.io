@@ -778,7 +778,15 @@ window.CONTENT = {
         pt: ["Ilustração de personagens", "Mascotes e lightsticks", "Banners frente e verso", "Arte final para impressão", "Entrevista com a banda"]
       },
       videos: [{ yt: "-jbwgi1w-os", title: { en: "My interview with CRTK", pt: "Minha entrevista com o CRTK" } }],
-      images: [...range("kpop", 5, "crtk-"), ...range("kpop", 4, "show-"), ...range("kpop", 6, "uau-")]
+      sets: [
+        { title: { en: "ChRocktikal · São Paulo, June 21, 2026", pt: "ChRocktikal · São Paulo, 21 de junho de 2026" },
+          note: { en: "\"CRTK: The Beginning\", the band's first world tour: the banner art, front and back, and the show. Show photos by Highway Star.", pt: "\"CRTK: The Beginning\", a primeira turnê mundial da banda: a arte do banner, frente e verso, e o show. Fotos do show: Highway Star." },
+          images: [...range("kpop", 5, "crtk-"), ...range("kpop", 4, "show-")] },
+        { title: { en: "UAU · São Paulo, August 15, 2025", pt: "UAU · São Paulo, 15 de agosto de 2025" },
+          note: { en: "The \"Playlist #You Are You\" fan concert: the banner art, the crowd raising it and the members holding it on stage.", pt: "O fan concert \"Playlist #You Are You\": a arte do banner, o público erguendo e as integrantes segurando no palco." },
+          loops: [VID("uau-show")],
+          images: [...range("kpop", 8, "uau-p"), ...range("kpop", 6, "uau-")] }
+      ]
     },
     {
       slug: "illustrations",
